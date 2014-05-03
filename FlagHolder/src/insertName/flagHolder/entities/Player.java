@@ -1,11 +1,24 @@
 package insertName.flagHolder.entities;
 
 import java.awt.*;
+import java.awt.event.*;
 import java.io.*;
 
-import Engine.*;
+import simpleEngine.collison.*;
+import simpleEngine.input.*;
+import simpleEngine.standardObjects.*;
 
 public class Player extends Entity {
+	
+	
+	
+	public Player() {
+		super();
+	}
+	
+	public Player(double x, double y, double width, double heigth) {
+		super(x, y, width, heigth);
+	}
 	
 	@Override
 	public void draw(Graphics2D g) {
@@ -14,14 +27,24 @@ public class Player extends Entity {
 	}
 	
 	@Override
-	public void collidedWith(Entity arg0) {
-		// TODO Auto-generated method stub
-		
+	public void update(long deltaT) {
+		int speed = (int) (0.48 * deltaT);
+		if(KeyboardListener.isKeyPressed(KeyEvent.VK_UP) && !KeyboardListener.isKeyPressed(KeyEvent.VK_DOWN)) {
+			this.move(0, -speed);
+		}
+		else if(!KeyboardListener.isKeyPressed(KeyEvent.VK_UP) && KeyboardListener.isKeyPressed(KeyEvent.VK_DOWN)) {
+			this.move(0, speed);
+		}
+		if(KeyboardListener.isKeyPressed(KeyEvent.VK_LEFT) && !KeyboardListener.isKeyPressed(KeyEvent.VK_RIGHT)) {
+			this.move(-speed, 0);
+		}
+		else if(!KeyboardListener.isKeyPressed(KeyEvent.VK_LEFT) && KeyboardListener.isKeyPressed(KeyEvent.VK_RIGHT)) {
+			this.move(speed, 0);
+		}
 	}
 	
 	@Override
-	public void update() {
-		// TODO Auto-generated method stub
+	public void collidedWith(Collideable arg0) {
 		
 	}
 	

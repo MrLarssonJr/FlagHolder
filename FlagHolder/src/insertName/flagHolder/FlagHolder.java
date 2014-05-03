@@ -3,21 +3,26 @@ package insertName.flagHolder;
 import insertName.flagHolder.entities.*;
 
 import java.awt.*;
-import java.util.*;
 
-import Engine.*;
+import simpleEngine.core.*;
 
-public class FlagHolder {
+public class FlagHolder implements Task {
+	private static GameClient gc;
+	
 	public static void main(String[] args) {
-		ArrayList<Scene> scenes = new ArrayList<Scene>();
-		Scene s = new Scene(Color.BLACK, new Dimension(400, 400));
-		s.add(new Player());
+		Engine e = new Engine(new Dimension(3000, 1000));
+		e.add("player", new Player(0, 0, 50, 50)); e.add(new Obstacle(100, 100, 50, 50));
+		e.add(new Obstacle(500, 475, 2000, 50));
+		e.add(new FlagHolder());
 		
-		scenes.add(s);
+		gc = new GameClient();
 		
-		Engine.getInstance(scenes);
-		
-		Engine.startGame();
+		e.startGame();
+	}
+	
+	@Override
+	public void run(GameState state) {
+		gc.setLatestGameState(state);
 	}
 	
 }
