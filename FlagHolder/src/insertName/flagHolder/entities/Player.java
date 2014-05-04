@@ -26,7 +26,8 @@ public class Player extends Entity {
 	
 	@Override
 	public void update(long deltaT) {
-		this.setWidth(this.getWidth()* 1.01);
+		int speedX = 4, speedY = 4;
+		this.move(2, 2);
 		//		int speed = (int) (0.48 * deltaT);
 		//		if(KeyboardListener.isKeyPressed(KeyEvent.VK_UP) && !KeyboardListener.isKeyPressed(KeyEvent.VK_DOWN)) {
 		//			this.move(0, -speed);

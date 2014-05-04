@@ -30,7 +30,7 @@ public class GameClient implements Runnable {
 		GameServer.registerPackets(networkClient.getKryo());
 		networkClient.start();
 		
-		java.util.List<InetAddress> hosts = networkClient.discoverHosts(54777, 5000);
+		java.util.List<InetAddress> hosts = networkClient.discoverHosts(54777, 500);
 		Object[] strings = new Object[hosts.size()];
 		for(int i = 0; i < hosts.size(); i++) {
 			strings[i] = hosts.get(i).getHostAddress();
