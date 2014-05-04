@@ -1,11 +1,9 @@
 package insertName.flagHolder.entities;
 
 import java.awt.*;
-import java.awt.event.*;
 import java.io.*;
 
 import simpleEngine.collison.*;
-import simpleEngine.input.*;
 import simpleEngine.standardObjects.*;
 
 public class Player extends Entity {
@@ -28,19 +26,20 @@ public class Player extends Entity {
 	
 	@Override
 	public void update(long deltaT) {
-		int speed = (int) (0.48 * deltaT);
-		if(KeyboardListener.isKeyPressed(KeyEvent.VK_UP) && !KeyboardListener.isKeyPressed(KeyEvent.VK_DOWN)) {
-			this.move(0, -speed);
-		}
-		else if(!KeyboardListener.isKeyPressed(KeyEvent.VK_UP) && KeyboardListener.isKeyPressed(KeyEvent.VK_DOWN)) {
-			this.move(0, speed);
-		}
-		if(KeyboardListener.isKeyPressed(KeyEvent.VK_LEFT) && !KeyboardListener.isKeyPressed(KeyEvent.VK_RIGHT)) {
-			this.move(-speed, 0);
-		}
-		else if(!KeyboardListener.isKeyPressed(KeyEvent.VK_LEFT) && KeyboardListener.isKeyPressed(KeyEvent.VK_RIGHT)) {
-			this.move(speed, 0);
-		}
+		this.setWidth(this.getWidth()* 1.01);
+		//		int speed = (int) (0.48 * deltaT);
+		//		if(KeyboardListener.isKeyPressed(KeyEvent.VK_UP) && !KeyboardListener.isKeyPressed(KeyEvent.VK_DOWN)) {
+		//			this.move(0, -speed);
+		//		}
+		//		else if(!KeyboardListener.isKeyPressed(KeyEvent.VK_UP) && KeyboardListener.isKeyPressed(KeyEvent.VK_DOWN)) {
+		//			this.move(0, speed);
+		//		}
+		//		if(KeyboardListener.isKeyPressed(KeyEvent.VK_LEFT) && !KeyboardListener.isKeyPressed(KeyEvent.VK_RIGHT)) {
+		//			this.move(-speed, 0);
+		//		}
+		//		else if(!KeyboardListener.isKeyPressed(KeyEvent.VK_LEFT) && KeyboardListener.isKeyPressed(KeyEvent.VK_RIGHT)) {
+		//			this.move(speed, 0);
+		//		}
 	}
 	
 	@Override
