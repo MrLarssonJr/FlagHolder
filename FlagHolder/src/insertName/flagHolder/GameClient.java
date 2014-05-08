@@ -1,20 +1,26 @@
 package insertName.flagHolder;
 
-import java.awt.*;
-import java.io.*;
-import java.net.*;
+import java.awt.HeadlessException;
+import java.io.IOException;
+import java.net.InetAddress;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
 
-import simpleEngine.core.*;
+import simpleEngine.core.GameState;
 
-import com.esotericsoftware.kryonet.*;
+import com.esotericsoftware.kryonet.Client;
+import com.esotericsoftware.minlog.Log;
 
 public class GameClient implements Runnable {
 	private Client networkClient;
 	private GameState latestGameState;
 	private simpleEngine.graphics.Window window;
 	private double targetFPS = 30;
+	
+	public static void main(String[] args) throws HeadlessException, IOException {
+		Log.set(Log.LEVEL_INFO);
+		new GameClient();
+	}
 	
 	public GameClient() throws HeadlessException, IOException {
 		initNetwork();
@@ -26,7 +32,7 @@ public class GameClient implements Runnable {
 	}
 	
 	private void initNetwork() throws IOException {
-		networkClient = new Client();
+		networkClient = new Client(16384, 4096);
 		GameServer.registerPackets(networkClient.getKryo());
 		networkClient.start();
 		

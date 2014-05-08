@@ -1,14 +1,12 @@
 package insertName.flagHolder;
 
-import java.awt.*;
-import java.io.*;
+import java.awt.HeadlessException;
+import java.io.IOException;
 
-import simpleEngine.core.*;
+import com.esotericsoftware.minlog.Log;
 
-import com.esotericsoftware.minlog.*;
-
-public class FlagHolder implements Task {
-	private GameClient gc;
+public class FlagHolder {
+	private GameClient gc, gc2;
 	private GameServer gs;
 	
 	public static void main(String[] args) throws HeadlessException, IOException {
@@ -16,10 +14,7 @@ public class FlagHolder implements Task {
 		new FlagHolder();
 	}
 	
-	@Override
-	public void run(GameState state) {
-		gc.setLatestGameState(state);
-	}
+	
 	
 	public FlagHolder() throws HeadlessException, IOException {
 		gs = new GameServer();

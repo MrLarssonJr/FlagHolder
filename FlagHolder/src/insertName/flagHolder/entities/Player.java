@@ -1,12 +1,18 @@
 package insertName.flagHolder.entities;
 
-import java.awt.*;
-import java.io.*;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.io.File;
 
-import simpleEngine.collison.*;
-import simpleEngine.standardObjects.*;
+import simpleEngine.collison.Collideable;
+import simpleEngine.core.Engine;
+import simpleEngine.core.Map;
+import simpleEngine.standardObjects.Entity;
+import simpleEngine.standardObjects.tileMap.TileMap;
 
 public class Player extends Entity {
+	private double speedX = 0.24, speedY = 0.24;
 	
 	
 	
@@ -26,26 +32,65 @@ public class Player extends Entity {
 	
 	@Override
 	public void update(long deltaT) {
-		int speedX = 4, speedY = 4;
-		this.move(2, 2);
-		//		int speed = (int) (0.48 * deltaT);
-		//		if(KeyboardListener.isKeyPressed(KeyEvent.VK_UP) && !KeyboardListener.isKeyPressed(KeyEvent.VK_DOWN)) {
-		//			this.move(0, -speed);
-		//		}
-		//		else if(!KeyboardListener.isKeyPressed(KeyEvent.VK_UP) && KeyboardListener.isKeyPressed(KeyEvent.VK_DOWN)) {
-		//			this.move(0, speed);
-		//		}
-		//		if(KeyboardListener.isKeyPressed(KeyEvent.VK_LEFT) && !KeyboardListener.isKeyPressed(KeyEvent.VK_RIGHT)) {
-		//			this.move(-speed, 0);
-		//		}
-		//		else if(!KeyboardListener.isKeyPressed(KeyEvent.VK_LEFT) && KeyboardListener.isKeyPressed(KeyEvent.VK_RIGHT)) {
-		//			this.move(speed, 0);
-		//		}
+		Map map = Engine.getLastCreatedEngine().getMap();
+		
+		double dx = speedX * deltaT;
+		double dy = speedY * deltaT;
+		
+		if(this.getY() <= 0 && speedY < 0) {
+			speedY *= -1;
+		}
+		else if(((this.getY() + this.getHeight()) >= Engine.getLastCreatedEngine().getMap().getSize().height) && speedY > 0) {
+			speedY *= -1;
+		}
+		
+		if(this.getX() <= 0 && speedX < 0) {
+			speedX *= -1;
+		}
+		else if((this.getX() + this.getWidth()) >= Engine.getLastCreatedEngine().getMap().getSize().width && speedX > 0) {
+			speedX *= -1;
+		}
+		
+		if(map instanceof TileMap) {
+			TileMap tMap = (TileMap) map;
+			
+			double nx = this.getX() + dx;
+			double ny = this.getY() + dy;
+			
+			if(tMap.isPosBlocked((int) nx, (int) this.getY())) {
+				dx = 0;
+				nx = this.getX();
+				speedX *= -1;
+			}
+			if(tMap.isPosBlocked((int) (nx + this.getWidth()), (int) this.getY())) {
+				dx = 0;
+				nx = this.getX();
+				speedX *= -1;
+			}
+			if(tMap.isPosBlocked((int) nx, (int) ny)) {
+				dy = 0;
+				speedY *= -1;
+			}
+			if(tMap.isPosBlocked((int) nx, (int) (ny + this.getHeight()))) {
+				dy = 0;
+				speedY *= -1;
+			}
+		}
+		
+		this.move(dx, dy);
+		
 	}
 	
 	@Override
 	public void collidedWith(Collideable arg0) {
 		
+	}
+	
+	@Override
+	public void move(double dx, double dy) {
+		
+		
+		super.move(dx, dy);
 	}
 	
 }

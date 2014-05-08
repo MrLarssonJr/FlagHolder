@@ -1,41 +1,56 @@
 package insertName.flagHolder;
 
-import insertName.flagHolder.entities.*;
+import insertName.flagHolder.entities.Obstacle;
+import insertName.flagHolder.entities.Player;
 
-import java.awt.*;
-import java.awt.geom.*;
-import java.io.*;
-import java.util.*;
+import java.awt.Dimension;
+import java.awt.geom.Rectangle2D;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
-import simpleEngine.core.*;
+import javax.swing.JOptionPane;
+
+import simpleEngine.core.Engine;
+import simpleEngine.core.GameObject;
+import simpleEngine.core.GameState;
 import simpleEngine.core.Map;
-import simpleEngine.network.*;
+import simpleEngine.network.GameStateUpdateSenderTask;
+import simpleEngine.standardObjects.tileMap.TileMap;
+import simpleEngine.standardObjects.tileMap.TileType;
 
-import com.esotericsoftware.kryo.*;
-import com.esotericsoftware.kryonet.*;
+import com.esotericsoftware.kryo.Kryo;
+import com.esotericsoftware.kryonet.Server;
+import com.esotericsoftware.minlog.Log;
 
 public class GameServer {
+	public static void main(String[] args) throws IOException {
+		Log.set(Log.LEVEL_INFO);
+		new GameServer();
+		System.exit(0);
+	}
+	
 	private Server networkServer;
 	private Engine e;
 	
 	public GameServer() throws IOException {
-		networkServer = new Server();
+		networkServer = new Server(16384, 4096);
 		registerPackets(networkServer.getKryo());
 		networkServer.start();
 		networkServer.bind(54555, 54777);
 		
-		e = new Engine(new Dimension(3000, 1000));
-		e.add("player", new Player(0, 0, 50, 50)); e.add(new Obstacle(100, 100, 50, 50));
-		e.add(new Obstacle(500, 475, 2000, 50));
+		e = new Engine(new TileMap(new Dimension(3000, 1000), new Dimension(40, 40), null));
+		e.add("player", new Player(0, 0, 30, 30));
 		e.add(new GameStateUpdateSenderTask(networkServer));
 		
 		e.startGame();
+		JOptionPane.showConfirmDialog(null, "Exit", "Exit", JOptionPane.YES_OPTION);
+		networkServer.stop();
 	}
 	
 	public static void registerPackets(Kryo kryo) {
 		kryo.register(GameObject.class);
 		kryo.register(Map.class);
-		kryo.register(GameState.class);
 		kryo.register(Player.class);
 		kryo.register(Obstacle.class);
 		kryo.register(HashMap.class);
@@ -43,6 +58,13 @@ public class GameServer {
 		kryo.register(Rectangle2D.Double.class);
 		kryo.register(Dimension.class);
 		kryo.register(String.class);
+		kryo.register(TileMap.class);
+		kryo.register(TileType.class);
+		kryo.register(TileType[].class);
+		kryo.register(TileType[][].class);
+		kryo.register(TileType.DefaultTile.class);
+		kryo.register(TileType.DefaultSolidTile.class);
+		kryo.register(GameState.class);
 	}
 	
 }
