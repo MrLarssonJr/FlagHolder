@@ -1,7 +1,6 @@
 package insertName.flagHolder.entities;
 
 import java.awt.*;
-import java.io.*;
 
 import simpleEngine.collison.*;
 import simpleEngine.core.*;
@@ -24,7 +23,7 @@ public class Player extends Entity {
 
 	@Override
 	public void draw(Graphics2D g, TextureStore textures) {
-		Image img = textures.getPreLoadedTexture("res" + File.separator + "img.png");
+		Image img = textures.getPreLoadedTexture("img.png");
 		g.drawImage(img, (int) this.getX(), (int) this.getY(), (int) this.getWidth(), (int) this.getHeight(), null);
 	}
 
