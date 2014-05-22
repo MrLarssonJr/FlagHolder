@@ -2,6 +2,7 @@ package insertName.flagHolder.entities;
 
 import insertName.flagHolder.GameServer;
 import insertName.flagHolder.KeyMap;
+import insertName.flagHolder.Weapon;
 
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -17,6 +18,7 @@ import simpleEngine.standardObjects.tileMap.TileMap;
 public class Player extends Entity {
 	private double speedXO = 1, speedYO = 1;
 	private int id;
+	private Weapon w;
 
 
 
@@ -25,9 +27,10 @@ public class Player extends Entity {
 		id = 0;
 	}
 
-	public Player(double x, double y, double width, double heigth, int id) {
+	public Player(double x, double y, double width, double heigth, int id, Weapon w) {
 		super(x, y, width, heigth);
 		this.id = id;
+		this.w = w;
 	}
 
 	@Override
@@ -104,7 +107,11 @@ public class Player extends Entity {
 		this.move(dx, dy);
 
 	}
-
+	
+	public void setWeapon(Weapon w){
+		this.w = w;
+	}
+	
 	@Override
 	public void collidedWith(Collideable arg0) {
 
