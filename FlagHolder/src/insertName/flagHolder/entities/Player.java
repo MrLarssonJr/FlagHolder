@@ -1,19 +1,15 @@
 package insertName.flagHolder.entities;
 
-import insertName.flagHolder.GameServer;
-import insertName.flagHolder.KeyMap;
-import insertName.flagHolder.Weapon;
+import insertName.flagHolder.*;
 
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.event.KeyEvent;
+import java.awt.*;
+import java.awt.event.*;
 
-import simpleEngine.collison.Collideable;
-import simpleEngine.core.Engine;
-import simpleEngine.core.Map;
-import simpleEngine.graphics.TextureStore;
-import simpleEngine.standardObjects.Entity;
-import simpleEngine.standardObjects.tileMap.TileMap;
+import simpleEngine.collison.*;
+import simpleEngine.core.*;
+import simpleEngine.graphics.*;
+import simpleEngine.standardObjects.*;
+import simpleEngine.standardObjects.tileMap.*;
 
 public class Player extends Entity {
 	private double speedXO = 1, speedYO = 1;
@@ -27,10 +23,10 @@ public class Player extends Entity {
 		id = 0;
 	}
 
-	public Player(double x, double y, double width, double heigth, int id, Weapon w) {
+	public Player(double x, double y, double width, double heigth, int id) {
 		super(x, y, width, heigth);
 		this.id = id;
-		this.w = w;
+		w = new Weapon(5, 5, "Place holder", 5, 5, 5);
 	}
 
 	@Override
@@ -43,22 +39,22 @@ public class Player extends Entity {
 	public void update(long deltaT) {
 		Map map = Engine.getLastCreatedEngine().getMap();
 		KeyMap kMap = GameServer.getLatestKeyMap(id);
-		
+
 		double speedX = 0;
 		double speedY = 0;
-		
+
 		if(kMap.isKeyPressed(KeyEvent.VK_UP) && !kMap.isKeyPressed(KeyEvent.VK_DOWN)) {
 			speedY = -speedYO;
 		}
 		else if(!kMap.isKeyPressed(KeyEvent.VK_UP) && kMap.isKeyPressed(KeyEvent.VK_DOWN)) {
-			speedY = speedYO; 
+			speedY = speedYO;
 		}
-		
+
 		if(kMap.isKeyPressed(KeyEvent.VK_RIGHT) && !kMap.isKeyPressed(KeyEvent.VK_LEFT)) {
 			speedX = speedXO;
 		}
 		else if(!kMap.isKeyPressed(KeyEvent.VK_RIGHT) && kMap.isKeyPressed(KeyEvent.VK_LEFT)) {
-			speedX = -speedXO; 
+			speedX = -speedXO;
 		}
 
 		double dx = speedX * deltaT;
@@ -107,11 +103,11 @@ public class Player extends Entity {
 		this.move(dx, dy);
 
 	}
-	
+
 	public void setWeapon(Weapon w){
 		this.w = w;
 	}
-	
+
 	@Override
 	public void collidedWith(Collideable arg0) {
 
