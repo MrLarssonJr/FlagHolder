@@ -8,25 +8,12 @@ import simpleEngine.standardObjects.*;
 
 public class Bullet extends Entity{
 
-
-
-	public Bullet() {
-		super();
-	}
-	public Bullet(double x, double y, double width, double heigth) {
-		super(x, y, width, heigth);
-	}
-
 	//Variables
-	private int x,y,team, width, height;
+	private int team;
 	private double xVelocity, yVelocity;
 	public Bullet(int x, int y, int team, int width, int height, double xVelocity, double yVelocity) {
-		super();
-		this.x = x;
-		this.y = y;
+		super(x, y, width, height);
 		this.team = team;
-		this.width = width;
-		this.height = height;
 		this.xVelocity = xVelocity;
 		this.yVelocity = yVelocity;
 	}
