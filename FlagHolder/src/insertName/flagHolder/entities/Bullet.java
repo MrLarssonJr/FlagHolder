@@ -1,15 +1,22 @@
 package insertName.flagHolder.entities;
 
-import java.awt.Graphics2D;
+import java.awt.*;
 
-import simpleEngine.collison.Collideable;
-import simpleEngine.graphics.TextureStore;
-import simpleEngine.standardObjects.Entity;
+import simpleEngine.collison.*;
+import simpleEngine.graphics.*;
+import simpleEngine.standardObjects.*;
 
 public class Bullet extends Entity{
-	
-	
-	
+
+
+
+	public Bullet() {
+		super();
+	}
+	public Bullet(double x, double y, double width, double heigth) {
+		super(x, y, width, heigth);
+	}
+
 	//Variables
 	private int x,y,team, width, height;
 	private double xVelocity, yVelocity;
@@ -26,17 +33,17 @@ public class Bullet extends Entity{
 	@Override
 	public void draw(Graphics2D g, TextureStore textures) {
 		// TODO Auto-generated method stub
-		
+
 	}
 	@Override
 	public void update(long deltaT) {
 		// TODO Auto-generated method stub
-		
+
 	}
 	@Override
 	public void collidedWith(Collideable otherObj) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 }
