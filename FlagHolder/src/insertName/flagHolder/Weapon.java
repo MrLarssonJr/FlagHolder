@@ -1,7 +1,7 @@
 package insertName.flagHolder;
 
 public class Weapon {
-	
+
 	//Variables
 	private double damage, fireRate;
 	private String name;
@@ -14,7 +14,7 @@ public class Weapon {
 		this.resAmmo = resAmmo;
 		this.clipSize = clipSize;
 	}
-	
+
 	//Get and set
 	public double getDamage() {
 		return damage;
@@ -51,5 +51,9 @@ public class Weapon {
 	}
 	public void setClipSize(int clipSize) {
 		this.clipSize = clipSize;
+	}
+
+	public void fire() {
+		Bullet b = new Bulle
 	}
 }

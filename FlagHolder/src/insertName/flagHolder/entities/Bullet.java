@@ -6,12 +6,12 @@ import simpleEngine.collison.*;
 import simpleEngine.graphics.*;
 import simpleEngine.standardObjects.*;
 
-public class Bullet extends Entity{
+public class Bullet extends Entity {
 
 	//Variables
 	private int team;
 	private double xVelocity, yVelocity;
-	public Bullet(int x, int y, int team, int width, int height, double xVelocity, double yVelocity) {
+	public Bullet(double x, double y, int team, double width, double height, double xVelocity, double yVelocity) {
 		super(x, y, width, height);
 		this.team = team;
 		this.xVelocity = xVelocity;

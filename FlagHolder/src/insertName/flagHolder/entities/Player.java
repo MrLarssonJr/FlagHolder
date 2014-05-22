@@ -27,12 +27,9 @@ public class Player extends Entity {
 	public Player(double x, double y, double width, double heigth, int id) {
 		super(x, y, width, heigth);
 		this.id = id;
-<<<<<<< HEAD
 		this.w = w;
 		this.hp = 100;
-=======
 		w = new Weapon(5, 5, "Place holder", 5, 5, 5);
->>>>>>> da5084272b2dc6e90cc7a1e0dbe4b12407ebdb90
 	}
 
 	@Override
