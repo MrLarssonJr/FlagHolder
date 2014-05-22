@@ -12,10 +12,10 @@ import simpleEngine.standardObjects.*;
 import simpleEngine.standardObjects.tileMap.*;
 
 public class Player extends Entity {
-	private double speedXO = 1, speedYO = 1;
-	private int id;
+	//Variables
+	private double speedXO = 1, speedYO = 1, hp;
+	private int id, team;
 	private Weapon w;
-	private int hp;
 
 
 
@@ -24,11 +24,16 @@ public class Player extends Entity {
 		id = 0;
 	}
 
-	public Player(double x, double y, double width, double heigth, int id) {
+	public Player(double x, double y, double width, double heigth, int id, int team) {
 		super(x, y, width, heigth);
 		this.id = id;
 		this.w = w;
+<<<<<<< HEAD
 		this.hp = 100;
+=======
+		this.hp = 100;
+		this.team = team;
+>>>>>>> fedefcd4614941066f53175e89a1d0bf2e9735c6
 		w = new Weapon(5, 5, "Place holder", 5, 5, 5);
 	}
 
@@ -107,13 +112,50 @@ public class Player extends Entity {
 
 	}
 
+	public double getSpeedXO() {
+		return speedXO;
+	}
+
+	public void setSpeedXO(double speedXO) {
+		this.speedXO = speedXO;
+	}
+
+	public double getSpeedYO() {
+		return speedYO;
+	}
+
+	public void setSpeedYO(double speedYO) {
+		this.speedYO = speedYO;
+	}
+
+	public double getHp() {
+		return hp;
+	}
+
+	public void setHp(double hp) {
+		this.hp = hp;
+	}
+
+	public int getTeam() {
+		return team;
+	}
+
+	public void setTeam(int team) {
+		this.team = team;
+	}
+
 	public void setWeapon(Weapon w){
 		this.w = w;
 	}
 
 	@Override
-	public void collidedWith(Collideable arg0) {
-
+	public void collidedWith(Collideable otherObj) {
+		if(otherObj instanceof Bullet){
+			Bullet b = (Bullet) otherObj;
+			if(b.getTeam() != this.team){
+				this.hp -= b.getDamage();
+			}
+		}
 	}
 
 	@Override
