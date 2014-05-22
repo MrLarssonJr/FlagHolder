@@ -1,5 +1,7 @@
 package insertName.flagHolder;
 
+import insertName.flagHolder.entities.Bullet;
+
 public class Weapon {
 
 	//Variables
@@ -53,7 +55,7 @@ public class Weapon {
 		this.clipSize = clipSize;
 	}
 
-	public void fire() {
-		Bullet b = new Bulle
+	public void fire(double x, double y, int team) {
+		Bullet b = new Bullet(x, y, team, 10, 5, 1.0, 1.0, this.damage);
 	}
 }
