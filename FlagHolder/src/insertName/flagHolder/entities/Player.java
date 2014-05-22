@@ -19,6 +19,7 @@ public class Player extends Entity {
 	private double speedXO = 1, speedYO = 1;
 	private int id;
 	private Weapon w;
+	private int hp;
 
 
 
@@ -31,6 +32,7 @@ public class Player extends Entity {
 		super(x, y, width, heigth);
 		this.id = id;
 		this.w = w;
+		this.hp = 100;
 	}
 
 	@Override

@@ -1,10 +1,14 @@
 package insertName.flagHolder.entities;
 
-import com.sun.xml.internal.stream.Entity;
+import java.awt.Graphics2D;
 
-public abstract class Bullet {
+import simpleEngine.collison.Collideable;
+import simpleEngine.graphics.TextureStore;
+import simpleEngine.standardObjects.Entity;
+
+public class Bullet extends Entity{
 	
-	//Extends Entity, Jesper? /Filip
+	
 	
 	//Variables
 	private int x,y,team, width, height;
@@ -18,6 +22,21 @@ public abstract class Bullet {
 		this.height = height;
 		this.xVelocity = xVelocity;
 		this.yVelocity = yVelocity;
+	}
+	@Override
+	public void draw(Graphics2D g, TextureStore textures) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void update(long deltaT) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void collidedWith(Collideable otherObj) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
