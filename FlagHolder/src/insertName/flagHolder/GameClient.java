@@ -1,22 +1,25 @@
 package insertName.flagHolder;
 
-import java.awt.*;
-import java.io.*;
-import java.net.*;
+import java.awt.HeadlessException;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.io.IOException;
+import java.net.InetAddress;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
 
-import simpleEngine.core.*;
-import simpleEngine.graphics.*;
+import simpleEngine.core.GameState;
+import simpleEngine.graphics.TextureStore;
 
-import com.esotericsoftware.kryonet.*;
-import com.esotericsoftware.minlog.*;
+import com.esotericsoftware.kryonet.Client;
+import com.esotericsoftware.minlog.Log;
 
 public class GameClient implements Runnable {
 	private Client networkClient;
 	private GameState latestGameState;
 	private simpleEngine.graphics.Window window;
 	private double targetFPS = 30;
+	private KeyMap map;
 
 	public static void main(String[] args) throws HeadlessException, IOException {
 		Log.set(Log.LEVEL_INFO);
@@ -24,13 +27,34 @@ public class GameClient implements Runnable {
 	}
 
 	public GameClient() throws HeadlessException, IOException {
+		map = new KeyMap();
 		TextureStore textures = new TextureStore();
 		String[] res = {"img.png"};
 		textures.preLoadTextures(res);
 
 		initNetwork();
 
-		window = new simpleEngine.graphics.Window(new AreaCamera(textures));
+		window = new simpleEngine.graphics.Window(new AreaCamera(textures, networkClient.getID()));
+		window.getCurrentCamera().addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				map.setKeyStatus(arg0.getKeyCode(), false);
+				InputPacket packet = new InputPacket(map);
+				networkClient.sendUDP(packet);
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				map.setKeyStatus(arg0.getKeyCode(), true);
+				InputPacket packet = new InputPacket(map);
+				networkClient.sendUDP(packet);
+			}
+		});
 		Thread t = new Thread(this);
 		t.setName("Render");
 		t.start();
