@@ -16,9 +16,9 @@ public class Player extends Entity {
 	private double speedXO = 1, speedYO = 1, hp;
 	private int id, team;
 	private Weapon w;
+	private boolean hasFlag;
 
-
-
+	
 	public Player() {
 		super();
 		id = 0;
@@ -31,6 +31,7 @@ public class Player extends Entity {
 		this.hp = 100;
 		this.hp = 100;
 		this.team = team;
+		this.hasFlag = false;
 		w = new Weapon(5, 5, "Place holder", 5, 5, 5);
 	}
 
@@ -152,6 +153,9 @@ public class Player extends Entity {
 			if(b.getTeam() != this.team){
 				this.hp -= b.getDamage();
 			}
+		}
+		if(otherObj instanceof Flag){
+			hasFlag = true;
 		}
 	}
 
