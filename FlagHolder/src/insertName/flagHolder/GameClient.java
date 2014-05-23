@@ -29,7 +29,7 @@ public class GameClient implements Runnable {
 	public GameClient() throws HeadlessException, IOException {
 		map = new KeyMap();
 		TextureStore textures = new TextureStore();
-		String[] res = {"img.png"};
+		String[] res = {"player.png", "bullet.png"};
 		textures.preLoadTextures(res);
 
 		initNetwork();

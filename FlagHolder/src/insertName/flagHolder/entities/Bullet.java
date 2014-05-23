@@ -21,13 +21,12 @@ public class Bullet extends Entity {
 	}
 	@Override
 	public void draw(Graphics2D g, TextureStore textures) {
-		// TODO Auto-generated method stub
-
+		Image img = textures.getPreLoadedTexture("bullet.png");
+		g.drawImage(img, (int) this.getX(), (int) this.getY(), (int) this.getWidth(), (int) this.getHeight(), null);
 	}
 	@Override
 	public void update(long deltaT) {
-		// TODO Auto-generated method stub
-
+		this.move(this.xVelocity * deltaT, this.yVelocity * deltaT);
 	}
 	@Override
 	public void collidedWith(Collideable otherObj) {

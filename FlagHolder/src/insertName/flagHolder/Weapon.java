@@ -57,7 +57,7 @@ public class Weapon {
 	}
 
 	public void fire(double x, double y, int team) {
-		Bullet b = new Bullet(x, y, team, 10, 5, 1.0, 1.0, this.damage);
+		Bullet b = new Bullet(x, y, team, 10, 10, 1.0, 1.0, this.damage);
 		Engine.getLastCreatedEngine().add(b);
 	}
 }
