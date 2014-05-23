@@ -11,8 +11,8 @@ public class Flag extends Entity{
 	
 	//Variables
 	
-	public Flag(double x, double y, double width, double height){
-		super(x, y, width, height);
+	public Flag(double x, double y){
+		super(x, y,10,10);
 		
 	}
 

@@ -107,7 +107,22 @@ public class Player extends Entity {
 		}
 
 		this.move(dx, dy);
-
+		
+		//When player dies
+		if(this.hp < 0){
+			respawn();
+		}
+		
+	}
+	
+	private void respawn(){
+		this.hp = 100;
+		this.setX(100);
+		this.setY(100);
+		this.w = new Weapon(5, 5, "Place holder", 5, 5, 5);
+		this.hasFlag = false;
+		Flag f = new Flag(this.getX(), this.getY());
+		Engine.getLastCreatedEngine().add(f);
 	}
 
 	public double getSpeedXO() {
@@ -161,8 +176,6 @@ public class Player extends Entity {
 
 	@Override
 	public void move(double dx, double dy) {
-
-
 		super.move(dx, dy);
 	}
 
