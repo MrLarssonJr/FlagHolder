@@ -1,7 +1,6 @@
 package insertName.flagHolder;
 
-import insertName.flagHolder.entities.Obstacle;
-import insertName.flagHolder.entities.Player;
+import insertName.flagHolder.entities.*;
 
 import java.awt.Dimension;
 import java.awt.geom.Rectangle2D;
@@ -55,7 +54,6 @@ public class GameServer {
 		kryo.register(GameObject.class);
 		kryo.register(Map.class);
 		kryo.register(Player.class);
-		kryo.register(Obstacle.class);
 		kryo.register(HashMap.class);
 		kryo.register(ArrayList.class);
 		kryo.register(Rectangle2D.Double.class);
@@ -74,6 +72,10 @@ public class GameServer {
 		kryo.register(Integer[].class);
 		kryo.register(Boolean[].class);
 		kryo.register(KeyMap.class);
+		kryo.register(Weapon.class);
+		kryo.register(Bullet.class);
+		kryo.register(Flag.class);
+		kryo.register(UpgradePack.class);
 	}
 	
 	public static KeyMap getLatestKeyMap(Integer id) {

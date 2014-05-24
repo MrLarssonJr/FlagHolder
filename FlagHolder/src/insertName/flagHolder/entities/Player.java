@@ -38,7 +38,7 @@ public class Player extends Entity {
 
 	@Override
 	public void draw(Graphics2D g, TextureStore textures) {
-		Image img = textures.getPreLoadedTexture("img.png");
+		Image img = textures.getPreLoadedTexture("player.png");
 		g.drawImage(img, (int) this.getX(), (int) this.getY(), (int) this.getWidth(), (int) this.getHeight(), null);
 	}
 
@@ -62,6 +62,9 @@ public class Player extends Entity {
 		}
 		else if(!kMap.isKeyPressed(KeyEvent.VK_RIGHT) && kMap.isKeyPressed(KeyEvent.VK_LEFT)) {
 			speedX = -speedXO;
+		}
+		if(kMap.isKeyPressed(KeyEvent.VK_SPACE)) {
+			this.fire();
 		}
 
 		double dx = speedX * deltaT;

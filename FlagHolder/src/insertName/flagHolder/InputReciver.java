@@ -29,7 +29,7 @@ public class InputReciver extends Listener {
 	
 	@Override
 	public void connected(Connection arg0) {
-		Engine.getLastCreatedEngine().add(arg0.getID() + "" , new Player(0, 0, 30, 30, arg0.getID()));
+		Engine.getLastCreatedEngine().add(arg0.getID() + "" , new Player(0, 0, 30, 30, arg0.getID(), 1));
 	}
 
 }

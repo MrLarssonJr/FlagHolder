@@ -6,12 +6,17 @@ import simpleEngine.collison.*;
 import simpleEngine.core.*;
 import simpleEngine.graphics.*;
 import simpleEngine.standardObjects.*;
+import simpleEngine.standardObjects.tileMap.TileMap;
 
 public class Bullet extends Entity {
 
 	//Variables
 	private int team;
 	private double xVelocity, yVelocity, damage;
+	
+	public Bullet(){
+		
+	}
 	
 	public Bullet(double x, double y, int team, double width, double height, double xVelocity, double yVelocity, double damage) {
 		super(x, y, width, height);
@@ -28,6 +33,14 @@ public class Bullet extends Entity {
 	@Override
 	public void update(long deltaT) {
 		this.move(this.xVelocity * deltaT, this.yVelocity * deltaT);
+		Map map = Engine.getLastCreatedEngine().getMap();
+		if(map instanceof TileMap) {
+			TileMap tMap = (TileMap) map;
+			if(tMap.isPosBlocked((int)this.getX(), (int)this.getY())) {
+				Engine.getLastCreatedEngine().remove(this);
+			}
+			
+		}
 	}
 	@Override
 	public void collidedWith(Collideable otherObj) {

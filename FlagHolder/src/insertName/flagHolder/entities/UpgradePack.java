@@ -16,6 +16,10 @@ public class UpgradePack extends Entity {
 	private Weapon w;
 	private double xVelocityUpgrade, yVelocityUpgrade, speedUpgradeTime;
 	
+	public UpgradePack(){
+		
+	}
+	
 	public UpgradePack(double x, double y, int type){
 		super(x, y,10,10);
 		this.type = type;

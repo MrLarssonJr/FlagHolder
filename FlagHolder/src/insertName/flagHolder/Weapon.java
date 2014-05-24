@@ -9,6 +9,11 @@ public class Weapon {
 	private double damage, fireRate;
 	private String name;
 	private int clipAmmo, resAmmo, clipSize;
+	
+	public Weapon(){
+		
+	}
+	
 	public Weapon(double damage, double fireRate, String name, int clipAmmo, int resAmmo, int clipSize) {
 		this.damage = damage;
 		this.fireRate = fireRate;

@@ -9,11 +9,12 @@ import simpleEngine.standardObjects.Entity;
 
 public class Flag extends Entity{
 	
-	//Variables
+	public Flag(){
+		
+	}
 	
 	public Flag(double x, double y){
 		super(x, y,10,10);
-		
 	}
 
 	@Override
