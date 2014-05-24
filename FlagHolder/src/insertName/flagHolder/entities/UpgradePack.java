@@ -12,8 +12,8 @@ import simpleEngine.standardObjects.Entity;
 public class UpgradePack extends Entity {
 	
 	//Variables
-	private int type;  //The type of upgrade (1 = weapon, 2 = speed..)
-	private Weapon w;
+	private int type;  //The type of upgrade (1 = rapid fire weapon, 2 = speed, 3 = instant weapon..)
+	private Weapon w1, w2;
 	private double xVelocityUpgrade, yVelocityUpgrade, speedUpgradeTime;
 	
 	public UpgradePack(){
@@ -25,6 +25,8 @@ public class UpgradePack extends Entity {
 		this.type = type;
 		this.xVelocityUpgrade = 10; //a constant
 		this.yVelocityUpgrade = 10; //a constant
+		this.w1 = new Weapon(8, 6, "Rapid Fire", 25, 25, 25, 10);
+		this.w2 = new Weapon(80, 0.5, "I hurt you very bad", 3, 3, 3, 400);
 	}
 
 	public double getSpeedUpgradeTime() {
@@ -39,8 +41,12 @@ public class UpgradePack extends Entity {
 		return this.yVelocityUpgrade;
 	}
 
-	public Weapon getWeapon() {
-		return this.w;
+	public Weapon getWeaponOne() {
+		return this.w1;
+	}
+	
+	public Weapon getWeaponTwo() {
+		return this.w2;
 	}
 
 	public int getType() {

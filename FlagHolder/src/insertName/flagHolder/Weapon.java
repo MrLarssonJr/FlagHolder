@@ -10,14 +10,14 @@ public class Weapon {
 	//Variables
 	private double damage, fireRate;
 	private String name;
-	private int clipAmmo, resAmmo, clipSize;
+	private int clipAmmo, resAmmo, clipSize, bulletVelocity;
 	private long timeNextShotAllowed = 0;
 
 	public Weapon(){
 
 	}
 
-	public Weapon(double damage, double fireRate, String name, int clipAmmo, int resAmmo, int clipSize) {
+	public Weapon(double damage, double fireRate, String name, int clipAmmo, int resAmmo, int clipSize, int bulletVelocity) {
 		this();
 		this.damage = damage;
 		this.fireRate = fireRate;
@@ -25,6 +25,7 @@ public class Weapon {
 		this.clipAmmo = clipAmmo;
 		this.resAmmo = resAmmo;
 		this.clipSize = clipSize;
+		this.bulletVelocity = bulletVelocity;
 	}
 
 	//Get and set
@@ -74,7 +75,7 @@ public class Weapon {
 		Log.info("tuals: " + timeUntilAllowedToShot);
 		if(timeUntilAllowedToShot >= 0 && clipAmmo > 0) {
 			clipAmmo--;
-			Bullet b = new Bullet(x, y, team, 10, 10, 1.0, 1.0, this.damage);
+			Bullet b = new Bullet(x, y, team, 10, 10, this.bulletVelocity, this.bulletVelocity, this.damage);
 			Engine.getLastCreatedEngine().add(b);
 			if(clipAmmo <= 0) {
 				timeNextShotAllowed = System.currentTimeMillis() + 1500;

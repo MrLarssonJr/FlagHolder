@@ -33,7 +33,7 @@ public class Player extends Entity {
 		this.hp = 100;
 		this.team = team;
 		this.hasFlag = false;
-		this.w = new Weapon(5, 5, "Place holder", 5, 5, 5);
+		this.w = this.getDefaultWeapon();
 	}
 
 	@Override
@@ -119,11 +119,15 @@ public class Player extends Entity {
 		
 	}
 	
+	public Weapon getDefaultWeapon(){
+		return new Weapon(10, 2, "Default Rifle", 10, Integer.MAX_VALUE, 10, 10);
+	}
+	
 	public void respawn(){
 		this.hp = 100;
 		this.setX(100);
 		this.setY(100);
-		this.w = new Weapon(5, 5, "Place holder", 5, 5, 5);
+		this.w = this.getDefaultWeapon();
 		this.hasFlag = false;
 		Flag f = new Flag(this.getX(), this.getY());
 		Engine.getLastCreatedEngine().add(f);
@@ -131,6 +135,9 @@ public class Player extends Entity {
 	
 	public void fire(){
 		this.w.fire(this.getX(), this.getY(), this.team);
+		if(this.w.getClipAmmo() == 0 && this.w.getResAmmo() == 0){
+			this.w = getDefaultWeapon();
+		}
 	}
 
 	public double getSpeedXO() {
@@ -183,11 +190,14 @@ public class Player extends Entity {
 		if(otherObj instanceof UpgradePack){
 			UpgradePack up = (UpgradePack) otherObj;
 			if(up.getType() == 1){
-				this.w = up.getWeapon();
+				this.w = up.getWeaponOne();
 			}
 			else if(up.getType() == 2){
 				//set xVelocity and yVelocity to up.getXVelocityUpgrade() and up.getXVelocityUpgrade()
 				//set speedForHowLong = up.getSpeedUpgradeTime();
+			}
+			else if(up.getType() == 3){
+				this.w = up.getWeaponTwo();
 			}
 		}
 	}
