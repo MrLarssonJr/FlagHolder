@@ -3,13 +3,15 @@ package insertName.flagHolder;
 import insertName.flagHolder.entities.*;
 import simpleEngine.core.*;
 
+import com.esotericsoftware.minlog.*;
+
 public class Weapon {
 
 	//Variables
 	private double damage, fireRate;
 	private String name;
 	private int clipAmmo, resAmmo, clipSize;
-	private long timeNextShotAllowed = Long.MAX_VALUE;
+	private long timeNextShotAllowed = 0;
 
 	public Weapon(){
 
@@ -64,8 +66,13 @@ public class Weapon {
 	}
 
 	public void fire(double x, double y, int team) {
+		Log.info("nsa: " + timeNextShotAllowed);
+		Log.info("curr time: " + System.currentTimeMillis());
+
 		long timeUntilAllowedToShot = System.currentTimeMillis() - timeNextShotAllowed;
-		if(timeUntilAllowedToShot <= 0 && clipAmmo > 0) {
+
+		Log.info("tuals: " + timeUntilAllowedToShot);
+		if(timeUntilAllowedToShot >= 0 && clipAmmo > 0) {
 			clipAmmo--;
 			Bullet b = new Bullet(x, y, team, 10, 10, 1.0, 1.0, this.damage);
 			Engine.getLastCreatedEngine().add(b);
