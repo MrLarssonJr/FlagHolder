@@ -1,7 +1,7 @@
 package insertName.flagHolder;
 
-import simpleEngine.core.Engine;
-import insertName.flagHolder.entities.Bullet;
+import insertName.flagHolder.entities.*;
+import simpleEngine.core.*;
 
 public class Weapon {
 
@@ -9,12 +9,14 @@ public class Weapon {
 	private double damage, fireRate;
 	private String name;
 	private int clipAmmo, resAmmo, clipSize;
-	
+	private long timeNextShotAllowed = Long.MAX_VALUE;
+
 	public Weapon(){
-		
+
 	}
-	
+
 	public Weapon(double damage, double fireRate, String name, int clipAmmo, int resAmmo, int clipSize) {
+		this();
 		this.damage = damage;
 		this.fireRate = fireRate;
 		this.name = name;
@@ -62,7 +64,33 @@ public class Weapon {
 	}
 
 	public void fire(double x, double y, int team) {
-		Bullet b = new Bullet(x, y, team, 10, 10, 1.0, 1.0, this.damage);
-		Engine.getLastCreatedEngine().add(b);
+		long timeUntilAllowedToShot = System.currentTimeMillis() - timeNextShotAllowed;
+		if(timeUntilAllowedToShot <= 0 && clipAmmo > 0) {
+			clipAmmo--;
+			Bullet b = new Bullet(x, y, team, 10, 10, 1.0, 1.0, this.damage);
+			Engine.getLastCreatedEngine().add(b);
+			if(clipAmmo <= 0) {
+				timeNextShotAllowed = System.currentTimeMillis() + 1500;
+				clipAmmo = clipSize;
+				resAmmo -= clipSize;
+				if(resAmmo < 0) {
+					clipAmmo += resAmmo;
+					resAmmo = 0;
+				}
+			}
+			else {
+				timeNextShotAllowed = (long) (System.currentTimeMillis() + (1000/fireRate));
+			}
+		}
+	}
+
+	public void reload() {
+		timeNextShotAllowed = System.currentTimeMillis() + 1499;
+		clipAmmo = clipSize;
+		resAmmo -= clipSize;
+		if(resAmmo < 0) {
+			clipAmmo += resAmmo;
+			resAmmo = 0;
+		}
 	}
 }
