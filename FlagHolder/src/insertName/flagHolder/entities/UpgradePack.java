@@ -16,11 +16,11 @@ public class UpgradePack extends Entity {
 	private Weapon w;
 	private double xVelocityUpgrade, yVelocityUpgrade, speedUpgradeTime;
 	
-	public UpgradePack(double x, double y, int type, double xVelocityUpgrade, double yVelocityUpgrade){
+	public UpgradePack(double x, double y, int type){
 		super(x, y,10,10);
 		this.type = type;
-		this.xVelocityUpgrade = xVelocityUpgrade;
-		this.yVelocityUpgrade = yVelocityUpgrade;
+		this.xVelocityUpgrade = 10; //a constant
+		this.yVelocityUpgrade = 10; //a constant
 	}
 
 	public double getSpeedUpgradeTime() {
