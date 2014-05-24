@@ -12,6 +12,7 @@ public class Bullet extends Entity {
 	//Variables
 	private int team;
 	private double xVelocity, yVelocity, damage;
+	
 	public Bullet(double x, double y, int team, double width, double height, double xVelocity, double yVelocity, double damage) {
 		super(x, y, width, height);
 		this.team = team;

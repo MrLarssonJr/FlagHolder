@@ -4,6 +4,7 @@ import insertName.flagHolder.*;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Random;
 
 import simpleEngine.collison.*;
 import simpleEngine.core.*;
@@ -17,6 +18,7 @@ public class Player extends Entity {
 	private int id, team;
 	private Weapon w;
 	private boolean hasFlag;
+	private double speedForHowLong; //this variable determines for how much time a speed upgrade has left
 
 	
 	public Player() {
@@ -27,12 +29,11 @@ public class Player extends Entity {
 	public Player(double x, double y, double width, double heigth, int id, int team) {
 		super(x, y, width, heigth);
 		this.id = id;
-		this.w = w;
 		this.hp = 100;
 		this.hp = 100;
 		this.team = team;
 		this.hasFlag = false;
-		w = new Weapon(5, 5, "Place holder", 5, 5, 5);
+		this.w = new Weapon(5, 5, "Place holder", 5, 5, 5);
 	}
 
 	@Override
@@ -115,7 +116,7 @@ public class Player extends Entity {
 		
 	}
 	
-	private void respawn(){
+	public void respawn(){
 		this.hp = 100;
 		this.setX(100);
 		this.setY(100);
@@ -123,6 +124,10 @@ public class Player extends Entity {
 		this.hasFlag = false;
 		Flag f = new Flag(this.getX(), this.getY());
 		Engine.getLastCreatedEngine().add(f);
+	}
+	
+	public void fire(){
+		this.w.fire(this.getX(), this.getY(), this.team);
 	}
 
 	public double getSpeedXO() {
@@ -171,6 +176,16 @@ public class Player extends Entity {
 		}
 		if(otherObj instanceof Flag){
 			hasFlag = true;
+		}
+		if(otherObj instanceof UpgradePack){
+			UpgradePack up = (UpgradePack) otherObj;
+			if(up.getType() == 1){
+				this.w = up.getWeapon();
+			}
+			else if(up.getType() == 2){
+				//set xVelocity and yVelocity to up.getXVelocityUpgrade() and up.getXVelocityUpgrade()
+				//set speedForHowLong = up.getSpeedUpgradeTime();
+			}
 		}
 	}
 
