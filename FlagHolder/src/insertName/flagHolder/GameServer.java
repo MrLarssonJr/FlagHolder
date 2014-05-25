@@ -2,25 +2,21 @@ package insertName.flagHolder;
 
 import insertName.flagHolder.entities.*;
 
-import java.awt.Dimension;
-import java.awt.geom.Rectangle2D;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.awt.*;
+import java.awt.geom.*;
+import java.io.*;
+import java.util.*;
 
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
-import simpleEngine.core.Engine;
-import simpleEngine.core.GameObject;
-import simpleEngine.core.GameState;
+import simpleEngine.core.*;
 import simpleEngine.core.Map;
-import simpleEngine.network.GameStateUpdateSenderTask;
-import simpleEngine.standardObjects.tileMap.TileMap;
-import simpleEngine.standardObjects.tileMap.TileType;
+import simpleEngine.network.*;
+import simpleEngine.standardObjects.tileMap.*;
 
-import com.esotericsoftware.kryo.Kryo;
-import com.esotericsoftware.kryonet.Server;
-import com.esotericsoftware.minlog.Log;
+import com.esotericsoftware.kryo.*;
+import com.esotericsoftware.kryonet.*;
+import com.esotericsoftware.minlog.*;
 
 public class GameServer {
 	public static void main(String[] args) throws IOException {
@@ -28,11 +24,11 @@ public class GameServer {
 		new GameServer();
 		System.exit(0);
 	}
-	
+
 	private Server networkServer;
 	private Engine e;
 	private static HashMap<Integer, KeyMap> maps;
-	
+
 	public GameServer() throws IOException {
 		maps = new HashMap<Integer, KeyMap>();
 		networkServer = new Server(16384, 4096);
@@ -40,16 +36,16 @@ public class GameServer {
 		networkServer.addListener(new InputReciver(maps));
 		networkServer.start();
 		networkServer.bind(54555, 54777);
-		
+
 		e = new Engine(new TileMap(new Dimension(3000, 1000), new Dimension(40, 40), null));
 //		e.add("player", new Player(0, 0, 30, 30));
 		e.add(new GameStateUpdateSenderTask(networkServer));
-		
+
 		e.startGame();
 		JOptionPane.showConfirmDialog(null, "Exit", "Exit", JOptionPane.YES_OPTION);
 		networkServer.stop();
 	}
-	
+
 	public static void registerPackets(Kryo kryo) {
 		kryo.register(GameObject.class);
 		kryo.register(Map.class);
@@ -70,14 +66,16 @@ public class GameServer {
 		kryo.register(Integer.class);
 		kryo.register(Boolean.class);
 		kryo.register(Integer[].class);
-		kryo.register(Boolean[].class);
 		kryo.register(KeyMap.class);
 		kryo.register(Weapon.class);
 		kryo.register(Bullet.class);
 		kryo.register(Flag.class);
 		kryo.register(UpgradePack.class);
+		kryo.register(Hitbox.class);
+		kryo.register(boolean[][].class);
+		kryo.register(boolean[].class);
 	}
-	
+
 	public static KeyMap getLatestKeyMap(Integer id) {
 		KeyMap map = maps.get(id);
 		if(map == null) {
@@ -86,5 +84,5 @@ public class GameServer {
 		}
 		return map;
 	}
-	
+
 }
