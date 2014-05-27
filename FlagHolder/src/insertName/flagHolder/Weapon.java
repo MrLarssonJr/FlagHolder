@@ -66,7 +66,7 @@ public class Weapon {
 		this.clipSize = clipSize;
 	}
 
-	public void fire(double x, double y, int team) {
+	public void fire(double x, double y, int team, double playerRotation) {
 		Log.info("nsa: " + timeNextShotAllowed);
 		Log.info("curr time: " + System.currentTimeMillis());
 
@@ -75,7 +75,7 @@ public class Weapon {
 		Log.info("tuals: " + timeUntilAllowedToShot);
 		if(timeUntilAllowedToShot >= 0 && clipAmmo > 0) {
 			clipAmmo--;
-			Bullet b = new Bullet(x, y, team, 10, 10, this.bulletVelocity, this.bulletVelocity, this.damage);
+			Bullet b = new Bullet(x, y, team, 10, 10, this.bulletVelocity, this.damage, playerRotation);
 			Engine.getLastCreatedEngine().add(b);
 			if(clipAmmo <= 0) {
 				timeNextShotAllowed = System.currentTimeMillis() + 1500;

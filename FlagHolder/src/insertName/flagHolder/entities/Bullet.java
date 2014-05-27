@@ -12,18 +12,18 @@ public class Bullet extends Entity {
 
 	//Variables
 	private int team;
-	private double xVelocity, yVelocity, damage;
+	private double speed, damage;
 	
 	public Bullet(){
 		
 	}
 	
-	public Bullet(double x, double y, int team, double width, double height, double xVelocity, double yVelocity, double damage) {
+	public Bullet(double x, double y, int team, double width, double height, double speed, double damage, double playerRotation) {
 		super(x, y, width, height);
 		this.team = team;
-		this.xVelocity = xVelocity;
-		this.yVelocity = yVelocity;
+		this.speed = speed;
 		this.damage = damage;
+		this.setRotation(playerRotation);
 	}
 	@Override
 	public void draw(Graphics2D g, TextureStore textures) {
@@ -32,7 +32,10 @@ public class Bullet extends Entity {
 	}
 	@Override
 	public void update(long deltaT) {
-		this.move(this.xVelocity * deltaT, this.yVelocity * deltaT);
+		double dx = this.speed * Math.cos(this.getRotation());
+		double dy = this.speed * Math.sin(this.getRotation());
+		this.move(dx * deltaT, dy * deltaT);
+		
 		Map map = Engine.getLastCreatedEngine().getMap();
 		if(map instanceof TileMap) {
 			TileMap tMap = (TileMap) map;
@@ -58,17 +61,11 @@ public class Bullet extends Entity {
 	public void setTeam(int team) {
 		this.team = team;
 	}
-	public double getxVelocity() {
-		return xVelocity;
+	public double getSpeed() {
+		return this.speed;
 	}
-	public void setxVelocity(double xVelocity) {
-		this.xVelocity = xVelocity;
-	}
-	public double getyVelocity() {
-		return yVelocity;
-	}
-	public void setyVelocity(double yVelocity) {
-		this.yVelocity = yVelocity;
+	public void setSpeed(double speed) {
+		this.speed = speed;
 	}
 	public double getDamage() {
 		return damage;

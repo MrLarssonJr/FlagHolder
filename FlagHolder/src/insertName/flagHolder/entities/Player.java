@@ -14,7 +14,7 @@ import simpleEngine.standardObjects.tileMap.*;
 
 public class Player extends Entity {
 	//Variables
-	private double speedXO = 1, speedYO = 1, hp;
+	private double speed, hp;
 	private int id, team;
 	private Weapon w;
 	private boolean hasFlag;
@@ -49,20 +49,59 @@ public class Player extends Entity {
 
 		double speedX = 0;
 		double speedY = 0;
-
-		if(kMap.isKeyPressed(KeyEvent.VK_UP) && !kMap.isKeyPressed(KeyEvent.VK_DOWN)) {
-			speedY = -speedYO;
+		
+		int vert = 0;
+		int hor = 0;
+		
+		if(kMap.isKeyPressed(KeyEvent.VK_UP) && !kMap.isKeyPressed(KeyEvent.VK_DOWN)){
+			vert = -1;
 		}
-		else if(!kMap.isKeyPressed(KeyEvent.VK_UP) && kMap.isKeyPressed(KeyEvent.VK_DOWN)) {
-			speedY = speedYO;
+		else if(!kMap.isKeyPressed(KeyEvent.VK_UP) && kMap.isKeyPressed(KeyEvent.VK_DOWN)){
+			vert = 1;
 		}
-
-		if(kMap.isKeyPressed(KeyEvent.VK_RIGHT) && !kMap.isKeyPressed(KeyEvent.VK_LEFT)) {
-			speedX = speedXO;
+		
+		if(!kMap.isKeyPressed(KeyEvent.VK_RIGHT) && kMap.isKeyPressed(KeyEvent.VK_LEFT)){
+			hor = -1;
 		}
-		else if(!kMap.isKeyPressed(KeyEvent.VK_RIGHT) && kMap.isKeyPressed(KeyEvent.VK_LEFT)) {
-			speedX = -speedXO;
+		else if(kMap.isKeyPressed(KeyEvent.VK_UP) && !kMap.isKeyPressed(KeyEvent.VK_DOWN)){
+			hor = 1;
 		}
+		
+		if(vert + hor == -2){
+			speedX = -(Math.sqrt(Math.pow(this.speed, 2)/2));
+			speedY = -(Math.sqrt(Math.pow(this.speed, 2)/2));
+		}
+		else if(vert + hor == -1){
+			if(vert == -1){
+				speedY = -speed;
+			}
+			else{
+				speedX = -speed;
+			}
+		}
+		else if(vert + hor == 0){
+			if(vert == 1){
+				speedX = -(Math.sqrt(Math.pow(this.speed, 2)/2));
+				speedY = (Math.sqrt(Math.pow(this.speed, 2)/2));
+			}
+			else{
+				speedX = (Math.sqrt(Math.pow(this.speed, 2)/2));
+				speedY = -(Math.sqrt(Math.pow(this.speed, 2)/2));
+			}
+		}
+		else if(vert + hor == 1){
+			if(vert == 1){
+				speedY = speed;
+			}
+			else{
+				speedX = speed;
+			}
+		}
+		else if(vert + hor == 2){
+			speedX = (Math.sqrt(Math.pow(this.speed, 2)/2));
+			speedY = (Math.sqrt(Math.pow(this.speed, 2)/2));
+		}
+		
 		if(kMap.isKeyPressed(KeyEvent.VK_SPACE)) {
 			this.fire();
 		}
@@ -134,26 +173,18 @@ public class Player extends Entity {
 	}
 	
 	public void fire(){
-		this.w.fire(this.getX(), this.getY(), this.team);
+		this.w.fire(this.getX(), this.getY(), this.team, this.getRotation());
 		if(this.w.getClipAmmo() == 0 && this.w.getResAmmo() == 0){
 			this.w = getDefaultWeapon();
 		}
 	}
 
-	public double getSpeedXO() {
-		return speedXO;
+	public double getSpeed() {
+		return speed;
 	}
 
-	public void setSpeedXO(double speedXO) {
-		this.speedXO = speedXO;
-	}
-
-	public double getSpeedYO() {
-		return speedYO;
-	}
-
-	public void setSpeedYO(double speedYO) {
-		this.speedYO = speedYO;
+	public void setSpeed(double speedXO) {
+		this.speed = speedXO;
 	}
 
 	public double getHp() {
