@@ -3,6 +3,7 @@ package insertName.flagHolder.entities;
 import insertName.flagHolder.Weapon;
 
 import java.awt.Graphics2D;
+import java.awt.Image;
 
 import simpleEngine.collison.Collideable;
 import simpleEngine.core.Engine;
@@ -16,6 +17,10 @@ public class UpgradePack extends Entity {
 	private Weapon w1, w2;
 	private double xVelocityUpgrade, yVelocityUpgrade, speedUpgradeTime;
 	
+	//Bobbing image variables
+	private double yStandard, f; //yStandard is the initiated coordinate, f is the bobbing distance
+	private boolean upDown; //upDown determines if the bobbing is + or -
+	
 	public UpgradePack(){
 		
 	}
@@ -27,6 +32,9 @@ public class UpgradePack extends Entity {
 		this.yVelocityUpgrade = 10; //a constant
 		this.w1 = new Weapon(8, 6, "Rapid Fire", 25, 25, 25, 10);
 		this.w2 = new Weapon(80, 0.5, "I hurt you very bad", 3, 3, 3, 400);
+		this.yStandard = y;
+		this.f = 50;
+		this.upDown = true;
 	}
 
 	public double getSpeedUpgradeTime() {
@@ -55,14 +63,28 @@ public class UpgradePack extends Entity {
 
 	@Override
 	public void draw(Graphics2D g, TextureStore textures) {
-		// TODO Auto-generated method stub
-		
+		Image img = textures.getPreLoadedTexture("upgrade.png");
+		g.drawImage(img, (int) this.getX(), (int) this.getY(), (int) this.getWidth(), (int) this.getHeight(), null);
 	}
 
 	@Override
 	public void update(long deltaT) {
-		// TODO Auto-generated method stub
 		
+		//Bobbing logic
+		if(upDown){
+            double dy = yStandard - f;
+            this.setY(this.getY() + (this.getY()-dy)/25);
+            if(this.getY()-5 < dy){
+                upDown = false;
+            }
+        }
+        else if(!upDown){
+            double dy = yStandard + f;
+            this.setY(this.getY() + (dy-this.getY())/25);
+            if(this.getY()+5 > dy){
+                upDown = true;
+            }
+        }
 	}
 
 	@Override

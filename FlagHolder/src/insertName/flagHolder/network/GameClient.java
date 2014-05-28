@@ -32,7 +32,7 @@ public class GameClient implements Runnable {
 	public GameClient() throws HeadlessException, IOException {
 		map = new KeyMap();
 		TextureStore textures = new TextureStore();
-		String[] res = {"player.png", "bullet.png"};
+		String[] res = {"player.png", "bullet.png", "flag.png", "upgrade.png"};
 		textures.preLoadTextures(res);
 
 		initNetwork();
