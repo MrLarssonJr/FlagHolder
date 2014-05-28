@@ -1,6 +1,8 @@
-package insertName.flagHolder;
+package insertName.flagHolder.network;
 
+import insertName.flagHolder.*;
 import insertName.flagHolder.entities.Player;
+import insertName.flagHolder.input.*;
 
 import java.util.HashMap;
 

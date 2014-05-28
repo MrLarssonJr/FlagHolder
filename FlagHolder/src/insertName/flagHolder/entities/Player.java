@@ -1,6 +1,9 @@
 package insertName.flagHolder.entities;
 
 import insertName.flagHolder.*;
+import insertName.flagHolder.input.*;
+import insertName.flagHolder.network.*;
+import insertName.flagHolder.server.*;
 
 import java.awt.*;
 import java.awt.event.*;

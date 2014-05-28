@@ -1,4 +1,7 @@
-package insertName.flagHolder;
+package insertName.flagHolder.network;
+
+import insertName.flagHolder.*;
+import insertName.flagHolder.input.*;
 
 public class InputPacket {
 	public KeyMap map;

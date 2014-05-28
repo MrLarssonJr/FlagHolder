@@ -1,4 +1,4 @@
-package insertName.flagHolder;
+package insertName.flagHolder.graphics;
 
 import java.awt.Color;
 import java.awt.Dimension;

@@ -1,4 +1,4 @@
-package insertName.flagHolder;
+package insertName.flagHolder.input;
 
 import java.util.HashMap;
 

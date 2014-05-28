@@ -1,6 +1,8 @@
-package insertName.flagHolder;
+package insertName.flagHolder.network;
 
+import insertName.flagHolder.*;
 import insertName.flagHolder.entities.*;
+import insertName.flagHolder.input.*;
 
 import java.awt.*;
 import java.awt.geom.*;

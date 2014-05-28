@@ -1,18 +1,21 @@
-package insertName.flagHolder;
+package insertName.flagHolder.network;
 
-import java.awt.HeadlessException;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.io.IOException;
-import java.net.InetAddress;
+import insertName.flagHolder.*;
+import insertName.flagHolder.graphics.*;
+import insertName.flagHolder.input.*;
 
-import javax.swing.JOptionPane;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.*;
+import java.net.*;
 
-import simpleEngine.core.GameState;
-import simpleEngine.graphics.TextureStore;
+import javax.swing.*;
 
-import com.esotericsoftware.kryonet.Client;
-import com.esotericsoftware.minlog.Log;
+import simpleEngine.core.*;
+import simpleEngine.graphics.*;
+
+import com.esotericsoftware.kryonet.*;
+import com.esotericsoftware.minlog.*;
 
 public class GameClient implements Runnable {
 	private Client networkClient;
@@ -36,18 +39,18 @@ public class GameClient implements Runnable {
 
 		window = new simpleEngine.graphics.Window(new AreaCamera(textures, networkClient.getID()));
 		window.getCurrentCamera().addKeyListener(new KeyListener() {
-			
+
 			@Override
 			public void keyTyped(KeyEvent arg0) {
 			}
-			
+
 			@Override
 			public void keyReleased(KeyEvent arg0) {
 				map.setKeyStatus(arg0.getKeyCode(), false);
 				InputPacket packet = new InputPacket(map);
 				networkClient.sendUDP(packet);
 			}
-			
+
 			@Override
 			public void keyPressed(KeyEvent arg0) {
 				map.setKeyStatus(arg0.getKeyCode(), true);

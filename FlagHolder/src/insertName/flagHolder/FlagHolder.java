@@ -1,5 +1,9 @@
 package insertName.flagHolder;
 
+import insertName.flagHolder.client.*;
+import insertName.flagHolder.network.*;
+import insertName.flagHolder.server.*;
+
 import java.awt.HeadlessException;
 import java.io.IOException;
 
