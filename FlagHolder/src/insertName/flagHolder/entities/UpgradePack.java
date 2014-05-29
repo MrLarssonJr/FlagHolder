@@ -81,7 +81,7 @@ public class UpgradePack extends Entity {
         else if(!upDown){
             double dy = yStandard + f;
             this.setY(this.getY() + (dy-this.getY())/25);
-            if(this.getY()+5 > dy){
+            if(this.getY()+10 > dy){
                 upDown = true;
             }
         }
