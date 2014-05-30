@@ -3,8 +3,6 @@ package insertName.flagHolder;
 import insertName.flagHolder.entities.*;
 import simpleEngine.core.*;
 
-import com.esotericsoftware.minlog.*;
-
 public class Weapon {
 
 	//Variables
@@ -67,12 +65,8 @@ public class Weapon {
 	}
 
 	public void fire(double x, double y, int team, double playerRotation) {
-		Log.info("nsa: " + timeNextShotAllowed);
-		Log.info("curr time: " + System.currentTimeMillis());
-
 		long timeUntilAllowedToShot = System.currentTimeMillis() - timeNextShotAllowed;
 
-		Log.info("tuals: " + timeUntilAllowedToShot);
 		if(timeUntilAllowedToShot >= 0 && clipAmmo > 0) {
 			clipAmmo--;
 			Bullet b = new Bullet(x, y, team, 10, 10, this.bulletVelocity, this.damage, playerRotation);

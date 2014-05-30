@@ -1,13 +1,8 @@
 package insertName.flagHolder.entities;
 
 import insertName.flagHolder.*;
-import insertName.flagHolder.input.*;
-import insertName.flagHolder.network.*;
-import insertName.flagHolder.server.*;
 
 import java.awt.*;
-import java.awt.event.*;
-import java.util.Random;
 
 import simpleEngine.collison.*;
 import simpleEngine.core.*;
@@ -23,7 +18,7 @@ public class Player extends Entity {
 	private boolean hasFlag;
 	private double speedForHowLong; //this variable determines for how much time a speed upgrade has left
 
-	
+
 	public Player() {
 		super();
 		id = 0;
@@ -48,28 +43,28 @@ public class Player extends Entity {
 	@Override
 	public void update(long deltaT) {
 		Map map = Engine.getLastCreatedEngine().getMap();
-		KeyMap kMap = GameServer.getLatestKeyMap(id);
+//		KeyMap kMap = GameServer.getLatestKeyMap(id);
 
 		double speedX = 0;
 		double speedY = 0;
-		
+
 		int vert = 0;
 		int hor = 0;
-		
-		if(kMap.isKeyPressed(KeyEvent.VK_UP) && !kMap.isKeyPressed(KeyEvent.VK_DOWN)){
-			vert = -1;
-		}
-		else if(!kMap.isKeyPressed(KeyEvent.VK_UP) && kMap.isKeyPressed(KeyEvent.VK_DOWN)){
-			vert = 1;
-		}
-		
-		if(!kMap.isKeyPressed(KeyEvent.VK_RIGHT) && kMap.isKeyPressed(KeyEvent.VK_LEFT)){
-			hor = -1;
-		}
-		else if(kMap.isKeyPressed(KeyEvent.VK_UP) && !kMap.isKeyPressed(KeyEvent.VK_DOWN)){
-			hor = 1;
-		}
-		
+
+//		if(kMap.isKeyPressed(KeyEvent.VK_UP) && !kMap.isKeyPressed(KeyEvent.VK_DOWN)){
+//			vert = -1;
+//		}
+//		else if(!kMap.isKeyPressed(KeyEvent.VK_UP) && kMap.isKeyPressed(KeyEvent.VK_DOWN)){
+//			vert = 1;
+//		}
+//
+//		if(!kMap.isKeyPressed(KeyEvent.VK_RIGHT) && kMap.isKeyPressed(KeyEvent.VK_LEFT)){
+//			hor = -1;
+//		}
+//		else if(kMap.isKeyPressed(KeyEvent.VK_UP) && !kMap.isKeyPressed(KeyEvent.VK_DOWN)){
+//			hor = 1;
+//		}
+
 		if(vert + hor == -2){
 			speedX = -(Math.sqrt(Math.pow(this.speed, 2)/2));
 			speedY = -(Math.sqrt(Math.pow(this.speed, 2)/2));
@@ -104,10 +99,10 @@ public class Player extends Entity {
 			speedX = (Math.sqrt(Math.pow(this.speed, 2)/2));
 			speedY = (Math.sqrt(Math.pow(this.speed, 2)/2));
 		}
-		
-		if(kMap.isKeyPressed(KeyEvent.VK_SPACE)) {
-			this.fire();
-		}
+
+//		if(kMap.isKeyPressed(KeyEvent.VK_SPACE)) {
+//			this.fire();
+//		}
 
 		double dx = speedX * deltaT;
 		double dy = speedY * deltaT;
@@ -153,18 +148,18 @@ public class Player extends Entity {
 		}
 
 		this.move(dx, dy);
-		
+
 		//When player dies
 		if(this.hp < 0){
 			respawn();
 		}
-		
+
 	}
-	
+
 	public Weapon getDefaultWeapon(){
 		return new Weapon(10, 2, "Default Rifle", 10, Integer.MAX_VALUE, 10, 10);
 	}
-	
+
 	public void respawn(){
 		this.hp = 100;
 		this.setX(100);
@@ -174,7 +169,7 @@ public class Player extends Entity {
 		Flag f = new Flag(this.getX(), this.getY());
 		Engine.getLastCreatedEngine().add(f);
 	}
-	
+
 	public void fire(){
 		this.w.fire(this.getX(), this.getY(), this.team, this.getRotation());
 		if(this.w.getClipAmmo() == 0 && this.w.getResAmmo() == 0){
