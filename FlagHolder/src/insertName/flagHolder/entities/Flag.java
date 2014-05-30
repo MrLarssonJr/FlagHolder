@@ -19,9 +19,9 @@ public class Flag extends Entity{
 	}
 	
 	public Flag(double x, double y){
-		super(x, y,10,10);
+		super(x, y,40,40);
 		this.yStandard = y;
-		this.f = 50;
+		this.f = 15;
 		this.upDown = true;
 	}
 
@@ -36,16 +36,16 @@ public class Flag extends Entity{
 	public void update(long deltaT) {
 		//Bobbing logic
 		if(upDown){
-            double dy = yStandard - f;
-            this.setY(this.getY() + (this.getY()-dy)/25);
-            if(this.getY()-5 < dy){
+            double destination = Math.abs(yStandard - f);
+            this.move(0, (destination-this.getY())/25);
+            if(this.getY()-5 < destination){
                 upDown = false;
             }
         }
         else if(!upDown){
-            double dy = yStandard + f;
-            this.setY(this.getY() + (dy-this.getY())/25);
-            if(this.getY()+10 > dy){
+            double destination = Math.abs(yStandard + f);
+            this.move(0, (destination-this.getY())/25);
+            if(this.getY()+10 > destination){
                 upDown = true;
             }
         }
