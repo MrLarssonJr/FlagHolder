@@ -36,16 +36,16 @@ public class Flag extends Entity{
 	public void update(long deltaT) {
 		//Bobbing logic
 		if(upDown){
-            double destination = Math.abs(yStandard - f);
-            this.move(0, (destination-this.getY())/25);
-            if(this.getY()-5 < destination){
+            double destination = yStandard - f;
+            this.move(0, -(this.getY()-destination)/25);
+            if(this.getY()-8 < destination){
                 upDown = false;
             }
         }
         else if(!upDown){
-            double destination = Math.abs(yStandard + f);
+            double destination = yStandard + f;
             this.move(0, (destination-this.getY())/25);
-            if(this.getY()+10 > destination){
+            if(this.getY()+8 > destination){
                 upDown = true;
             }
         }
