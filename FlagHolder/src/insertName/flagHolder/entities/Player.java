@@ -36,6 +36,7 @@ public class Player extends Entity {
 		this.hasFlag = false;
 		this.w = this.getDefaultWeapon();
 		input = map;
+		this.setRotation(Math.PI+2*Math.PI/3);
 	}
 
 	@Override
@@ -160,7 +161,7 @@ public class Player extends Entity {
 	}
 
 	public Weapon getDefaultWeapon(){
-		return new Weapon(10, 2, "Default Rifle", 10, Integer.MAX_VALUE, 10, 10);
+		return new Weapon(10, 2, "Default Rifle", 10, Integer.MAX_VALUE, 10, 2);
 	}
 
 	public void respawn(){

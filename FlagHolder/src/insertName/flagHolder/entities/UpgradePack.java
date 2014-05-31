@@ -30,7 +30,7 @@ public class UpgradePack extends Entity {
 		this.type = type;
 		this.xVelocityUpgrade = 10; //a constant
 		this.yVelocityUpgrade = 10; //a constant
-		this.w1 = new Weapon(8, 6, "Rapid Fire", 25, 25, 25, 10);
+		this.w1 = new Weapon(8, 6, "Rapid Fire", 25, 25, 25, 2);
 		this.w2 = new Weapon(80, 0.5, "I hurt you very bad", 3, 3, 3, 400);
 		this.yStandard = y;
 		this.f = 15;
