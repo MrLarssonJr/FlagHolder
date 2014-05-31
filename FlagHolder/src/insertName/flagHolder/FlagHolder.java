@@ -46,7 +46,7 @@ public class FlagHolder {
 		Engine e = new Engine(new TileMap(new Dimension(3000, 1000), new Dimension(40, 40), null));
 		e.add(0 + "",  new Player(0, 0, 30, 30, 0, 1, input));
 		e.add( new Flag(50,40));
-		e.add( new UpgradePack(100,40,1));
+		e.add( new UpgradePack(100,0,1));
 
 		TextureStore textures = new TextureStore();
 		String[] res = {"player.png", "bullet.png", "flag.png", "upgrade.png"};
