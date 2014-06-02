@@ -47,7 +47,7 @@ public class Player extends Entity {
 
 	@Override
 	public void update(long deltaT) {
-		this.setRotation(this.getRotation() + 0.02);
+		this.setRotation(this.getRotation() + 0.03);
 		Map map = Engine.getLastCreatedEngine().getMap();
 
 		double speedX = 0;
@@ -150,6 +150,7 @@ public class Player extends Entity {
 				speedY = 0;
 			}
 		}
+
 
 		this.move(dx, dy);
 

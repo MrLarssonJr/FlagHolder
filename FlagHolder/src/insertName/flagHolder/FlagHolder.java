@@ -44,7 +44,7 @@ public class FlagHolder {
 	private static void startLocalVersion() throws IOException {
 		final KeyMap input = new KeyMap();
 		Engine e = new Engine(new TileMap(new Dimension(3000, 1000), new Dimension(40, 40), null));
-		e.add(0 + "",  new Player(0, 0, 30, 30, 0, 1, input,600));
+		e.add(0 + "",  new Player(0, 0, 30, 30, 0, 1, input, 600));
 		e.add( new Flag(50,40));
 		e.add( new UpgradePack(100,0,1));
 
