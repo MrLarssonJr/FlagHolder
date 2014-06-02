@@ -1,6 +1,6 @@
 package insertName.flagHolder.entities;
 
-import java.awt.*;
+import java.awt.image.*;
 
 import simpleEngine.collison.*;
 import simpleEngine.core.*;
@@ -27,8 +27,8 @@ public class Bullet extends Entity {
 	}
 	@Override
 	public void draw(GameGraphics g, TextureStore textures) {
-		Image img = textures.getPreLoadedTexture("bullet.png");
-		g.drawImage(img, (int) this.getX(), (int) this.getY(), (int) this.getWidth(), (int) this.getHeight(), null);
+		BufferedImage img = textures.getPreLoadedTexture("bullet.png");
+		g.drawGameObject(this, img);
 	}
 	@Override
 	public void update(long deltaT) {

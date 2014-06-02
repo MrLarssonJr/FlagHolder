@@ -2,7 +2,7 @@ package insertName.flagHolder.entities;
 
 import insertName.flagHolder.*;
 
-import java.awt.*;
+import java.awt.image.*;
 
 import simpleEngine.collison.*;
 import simpleEngine.core.*;
@@ -62,8 +62,8 @@ public class UpgradePack extends Entity {
 
 	@Override
 	public void draw(GameGraphics g, TextureStore textures) {
-		Image img = textures.getPreLoadedTexture("upgrade.png");
-		g.drawImage(img, (int) this.getX(), (int) this.getY(), (int) this.getWidth(), (int) this.getHeight(), null);
+		BufferedImage img = textures.getPreLoadedTexture("upgrade.png");
+		g.drawGameObject(this, img);
 	}
 
 	@Override

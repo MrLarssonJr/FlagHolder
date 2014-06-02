@@ -1,6 +1,6 @@
 package insertName.flagHolder.entities;
 
-import java.awt.*;
+import java.awt.image.*;
 
 import simpleEngine.collison.*;
 import simpleEngine.core.*;
@@ -26,8 +26,8 @@ public class Flag extends Entity{
 
 	@Override
 	public void draw(GameGraphics g, TextureStore textures) {
-		Image img = textures.getPreLoadedTexture("flag.png");
-		g.drawImage(img, (int) this.getX(), (int) this.getY(), (int) this.getWidth(), (int) this.getHeight(), null);
+		BufferedImage img = textures.getPreLoadedTexture("flag.png");
+		g.drawGameObject(this, img);
 
 	}
 

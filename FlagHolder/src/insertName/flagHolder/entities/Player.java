@@ -3,8 +3,8 @@ package insertName.flagHolder.entities;
 import insertName.flagHolder.*;
 import insertName.flagHolder.input.*;
 
-import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.*;
 
 import simpleEngine.collison.*;
 import simpleEngine.core.*;
@@ -25,17 +25,7 @@ public class Player extends Entity {
 	private double speedForHowLong; //this variable determines for how much time a speed upgrade has left
 	private KeyMap input;
 
-<<<<<<< HEAD
-	public Player(double x, double y, double width, double heigth, int id, int team, KeyMap map) {
-=======
-
-	public Player() {
-		super();
-		id = 0;
-	}
-
 	public Player(double x, double y, double width, double heigth, int id, int team, KeyMap map, int speed) {
->>>>>>> c9c74586f7c77cbd924c4e5d528e01f115081135
 		super(x, y, width, heigth);
 		this.id = id;
 		this.hp = 100;
@@ -50,12 +40,14 @@ public class Player extends Entity {
 
 	@Override
 	public void draw(GameGraphics g, TextureStore textures) {
-		Image img = textures.getPreLoadedTexture("player.png");
-		g.drawImage(img, (int) this.getX(), (int) this.getY(), (int) this.getWidth(), (int) this.getHeight(), null);
+		BufferedImage img = textures.getPreLoadedTexture("player.png");
+		g.drawGameObject(this, img);
+//		g.drawImage(img, (int) this.getX(), (int) this.getY(), (int) this.getWidth(), (int) this.getHeight(), null);
 	}
 
 	@Override
 	public void update(long deltaT) {
+		this.setRotation(this.getRotation() + 0.02);
 		Map map = Engine.getLastCreatedEngine().getMap();
 
 		double speedX = 0;
@@ -116,8 +108,8 @@ public class Player extends Entity {
 		if(input.isKeyPressed(KeyEvent.VK_SPACE)) {
 			this.fire();
 		}
-		double dx = speedX * (double)deltaT/1000.0;
-		double dy = speedY * (double)deltaT/1000.0;
+		double dx = speedX * deltaT/1000.0;
+		double dy = speedY * deltaT/1000.0;
 
 		if(this.getY() <= 0 && speedY < 0) {
 			dy = 0;
