@@ -25,7 +25,17 @@ public class Player extends Entity {
 	private double speedForHowLong; //this variable determines for how much time a speed upgrade has left
 	private KeyMap input;
 
+<<<<<<< HEAD
 	public Player(double x, double y, double width, double heigth, int id, int team, KeyMap map) {
+=======
+
+	public Player() {
+		super();
+		id = 0;
+	}
+
+	public Player(double x, double y, double width, double heigth, int id, int team, KeyMap map, int speed) {
+>>>>>>> c9c74586f7c77cbd924c4e5d528e01f115081135
 		super(x, y, width, heigth);
 		this.id = id;
 		this.hp = 100;
@@ -33,7 +43,9 @@ public class Player extends Entity {
 		this.team = team;
 		this.hasFlag = false;
 		this.w = this.getDefaultWeapon();
+		this.speed = speed;
 		input = map;
+		this.setRotation(Math.PI+2*Math.PI/3);
 	}
 
 	@Override
@@ -52,17 +64,17 @@ public class Player extends Entity {
 		int vert = 0;
 		int hor = 0;
 
-		if(input.isKeyPressed(KeyEvent.VK_UP) && !input.isKeyPressed(KeyEvent.VK_DOWN)){
+		if(input.isKeyPressed(KeyEvent.VK_W) && !input.isKeyPressed(KeyEvent.VK_S)){
 			vert = -1;
 		}
-		else if(!input.isKeyPressed(KeyEvent.VK_UP) && input.isKeyPressed(KeyEvent.VK_DOWN)){
+		else if(!input.isKeyPressed(KeyEvent.VK_W) && input.isKeyPressed(KeyEvent.VK_S)){
 			vert = 1;
 		}
 
-		if(!input.isKeyPressed(KeyEvent.VK_RIGHT) && input.isKeyPressed(KeyEvent.VK_LEFT)){
+		if(!input.isKeyPressed(KeyEvent.VK_D) && input.isKeyPressed(KeyEvent.VK_A)){
 			hor = -1;
 		}
-		else if(input.isKeyPressed(KeyEvent.VK_UP) && !input.isKeyPressed(KeyEvent.VK_DOWN)){
+		else if(input.isKeyPressed(KeyEvent.VK_D) && !input.isKeyPressed(KeyEvent.VK_A)){
 			hor = 1;
 		}
 
@@ -83,7 +95,7 @@ public class Player extends Entity {
 				speedX = -(Math.sqrt(Math.pow(this.speed, 2)/2));
 				speedY = (Math.sqrt(Math.pow(this.speed, 2)/2));
 			}
-			else{
+			else if(hor == 1){
 				speedX = (Math.sqrt(Math.pow(this.speed, 2)/2));
 				speedY = -(Math.sqrt(Math.pow(this.speed, 2)/2));
 			}
@@ -104,9 +116,8 @@ public class Player extends Entity {
 		if(input.isKeyPressed(KeyEvent.VK_SPACE)) {
 			this.fire();
 		}
-
-		double dx = speedX * deltaT;
-		double dy = speedY * deltaT;
+		double dx = speedX * (double)deltaT/1000.0;
+		double dy = speedY * (double)deltaT/1000.0;
 
 		if(this.getY() <= 0 && speedY < 0) {
 			dy = 0;
@@ -158,7 +169,7 @@ public class Player extends Entity {
 	}
 
 	public Weapon getDefaultWeapon(){
-		return new Weapon(10, 2, "Default Rifle", 10, Integer.MAX_VALUE, 10, 10);
+		return new Weapon(10, 2, "Default Rifle", 10, Integer.MAX_VALUE, 10, 2);
 	}
 
 	public void respawn(){

@@ -44,10 +44,12 @@ public class FlagHolder {
 	private static void startLocalVersion() throws IOException {
 		final KeyMap input = new KeyMap();
 		Engine e = new Engine(new TileMap(new Dimension(3000, 1000), new Dimension(40, 40), null));
-		e.add(0 + "",  new Player(0, 0, 30, 30, 0, 1, input));
+		e.add(0 + "",  new Player(0, 0, 30, 30, 0, 1, input,600));
+		e.add( new Flag(50,40));
+		e.add( new UpgradePack(100,0,1));
 
 		TextureStore textures = new TextureStore();
-		String[] res = {"player.png", "bullet.png"};
+		String[] res = {"player.png", "bullet.png", "flag.png", "upgrade.png"};
 		textures.preLoadTextures(res);
 
 		Camera c = new AreaCamera(textures, 0);

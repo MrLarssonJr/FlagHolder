@@ -69,7 +69,7 @@ public class Weapon {
 
 		if(timeUntilAllowedToShot >= 0 && clipAmmo > 0) {
 			clipAmmo--;
-			Bullet b = new Bullet(x, y, team, 10, 10, this.bulletVelocity, this.damage, playerRotation);
+			Bullet b = new Bullet(x, y, team, 20, 20, this.bulletVelocity, this.damage, playerRotation);
 			Engine.getLastCreatedEngine().add(b);
 			if(clipAmmo <= 0) {
 				timeNextShotAllowed = System.currentTimeMillis() + 1500;
