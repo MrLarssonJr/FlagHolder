@@ -1,14 +1,10 @@
 package insertName.flagHolder.graphics;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics2D;
+import java.awt.*;
 
-import simpleEngine.core.GameObject;
-import simpleEngine.core.GameState;
-import simpleEngine.graphics.Camera;
-import simpleEngine.graphics.TextureStore;
-import simpleEngine.standardObjects.tileMap.TileMap;
+import simpleEngine.core.*;
+import simpleEngine.graphics.*;
+import simpleEngine.standardObjects.tileMap.*;
 
 public class AreaCamera extends Camera {
 	/**
@@ -23,7 +19,7 @@ public class AreaCamera extends Camera {
 	}
 
 	@Override
-	public void draw(Graphics2D g, GameState state) {
+	public void draw(GameGraphics g, GameState state) {
 		GameObject player = state.indexedObjects.get(id + "");
 		int translationX = -((int)(player.getX() + player.getWidth()/2)) + 500;
 		int translationY = -((int)(player.getY() + player.getHeight()/2)) + 500;

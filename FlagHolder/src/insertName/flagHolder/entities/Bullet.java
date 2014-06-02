@@ -6,18 +6,18 @@ import simpleEngine.collison.*;
 import simpleEngine.core.*;
 import simpleEngine.graphics.*;
 import simpleEngine.standardObjects.*;
-import simpleEngine.standardObjects.tileMap.TileMap;
+import simpleEngine.standardObjects.tileMap.*;
 
 public class Bullet extends Entity {
 
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 8632047927081765186L;
 	//Variables
 	private int team;
 	private double speed, damage;
-	
-	public Bullet(){
-		
-	}
-	
+
 	public Bullet(double x, double y, int team, double width, double height, double speed, double damage, double playerRotation) {
 		super(x, y, width, height);
 		this.team = team;
@@ -26,7 +26,7 @@ public class Bullet extends Entity {
 		this.setRotation(playerRotation);
 	}
 	@Override
-	public void draw(Graphics2D g, TextureStore textures) {
+	public void draw(GameGraphics g, TextureStore textures) {
 		Image img = textures.getPreLoadedTexture("bullet.png");
 		g.drawImage(img, (int) this.getX(), (int) this.getY(), (int) this.getWidth(), (int) this.getHeight(), null);
 	}
@@ -35,14 +35,14 @@ public class Bullet extends Entity {
 		double dx = this.speed * Math.cos(this.getRotation());
 		double dy = this.speed * Math.sin(this.getRotation());
 		this.move(dx * deltaT, dy * deltaT);
-		
+
 		Map map = Engine.getLastCreatedEngine().getMap();
 		if(map instanceof TileMap) {
 			TileMap tMap = (TileMap) map;
 			if(tMap.isPosBlocked((int)this.getX(), (int)this.getY())) {
 				Engine.getLastCreatedEngine().remove(this);
 			}
-			
+
 		}
 	}
 	@Override

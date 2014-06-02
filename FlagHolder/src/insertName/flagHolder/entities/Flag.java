@@ -1,23 +1,22 @@
 package insertName.flagHolder.entities;
 
-import java.awt.Graphics2D;
-import java.awt.Image;
+import java.awt.*;
 
-import simpleEngine.collison.Collideable;
-import simpleEngine.core.Engine;
-import simpleEngine.graphics.TextureStore;
-import simpleEngine.standardObjects.Entity;
+import simpleEngine.collison.*;
+import simpleEngine.core.*;
+import simpleEngine.graphics.*;
+import simpleEngine.standardObjects.*;
 
 public class Flag extends Entity{
-	
+
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 4241096700829440586L;
 	//Bobbing image variables
 	private double yStandard, f; //yStandard is the initiated coordinate, f is the bobbing distance
 	private boolean upDown; //upDown determines if the bobbing is + or -
-	
-	public Flag(){
-		
-	}
-	
+
 	public Flag(double x, double y){
 		super(x, y,10,10);
 		this.yStandard = y;
@@ -26,10 +25,10 @@ public class Flag extends Entity{
 	}
 
 	@Override
-	public void draw(Graphics2D g, TextureStore textures) {
+	public void draw(GameGraphics g, TextureStore textures) {
 		Image img = textures.getPreLoadedTexture("flag.png");
 		g.drawImage(img, (int) this.getX(), (int) this.getY(), (int) this.getWidth(), (int) this.getHeight(), null);
-		
+
 	}
 
 	@Override
@@ -56,6 +55,6 @@ public class Flag extends Entity{
 		if(otherObj instanceof Player){
 			Engine.getLastCreatedEngine().remove(this);
 		}
-		
+
 	}
 }

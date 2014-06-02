@@ -13,6 +13,10 @@ import simpleEngine.standardObjects.*;
 import simpleEngine.standardObjects.tileMap.*;
 
 public class Player extends Entity {
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = -5761530654521685452L;
 	//Variables
 	private double speed, hp;
 	private int id, team;
@@ -20,12 +24,6 @@ public class Player extends Entity {
 	private boolean hasFlag;
 	private double speedForHowLong; //this variable determines for how much time a speed upgrade has left
 	private KeyMap input;
-
-
-	public Player() {
-		super();
-		id = 0;
-	}
 
 	public Player(double x, double y, double width, double heigth, int id, int team, KeyMap map) {
 		super(x, y, width, heigth);
@@ -39,7 +37,7 @@ public class Player extends Entity {
 	}
 
 	@Override
-	public void draw(Graphics2D g, TextureStore textures) {
+	public void draw(GameGraphics g, TextureStore textures) {
 		Image img = textures.getPreLoadedTexture("player.png");
 		g.drawImage(img, (int) this.getX(), (int) this.getY(), (int) this.getWidth(), (int) this.getHeight(), null);
 	}
