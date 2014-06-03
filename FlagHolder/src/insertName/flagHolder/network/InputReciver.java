@@ -12,9 +12,9 @@ import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 
 public class InputReciver extends Listener {
-	private HashMap<Integer, KeyMap> maps;
+	private HashMap<Integer, KeyboardListener> maps;
 	
-	public InputReciver(HashMap<Integer, KeyMap> maps) {
+	public InputReciver(HashMap<Integer, KeyboardListener> maps) {
 		this.maps = maps;
 	}
 

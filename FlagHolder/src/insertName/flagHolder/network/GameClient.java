@@ -22,7 +22,7 @@ public class GameClient implements Runnable {
 	private GameState latestGameState;
 	private simpleEngine.graphics.Window window;
 	private double targetFPS = 30;
-	private KeyMap map;
+	private KeyboardListener map;
 
 	public static void main(String[] args) throws HeadlessException, IOException {
 		Log.set(Log.LEVEL_INFO);
@@ -30,7 +30,7 @@ public class GameClient implements Runnable {
 	}
 
 	public GameClient() throws HeadlessException, IOException {
-		map = new KeyMap();
+		map = new KeyboardListener();
 		TextureStore textures = new TextureStore();
 		String[] res = {"player.png", "bullet.png", "flag.png", "upgrade.png"};
 		textures.preLoadTextures(res);

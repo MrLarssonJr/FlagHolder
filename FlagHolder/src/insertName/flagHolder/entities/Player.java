@@ -1,7 +1,6 @@
 package insertName.flagHolder.entities;
 
 import insertName.flagHolder.*;
-import insertName.flagHolder.input.*;
 
 import java.awt.event.*;
 import java.awt.image.*;
@@ -9,6 +8,8 @@ import java.awt.image.*;
 import simpleEngine.collison.*;
 import simpleEngine.core.*;
 import simpleEngine.graphics.*;
+import simpleEngine.input.*;
+import simpleEngine.input.MouseListener;
 import simpleEngine.standardObjects.*;
 import simpleEngine.standardObjects.tileMap.*;
 
@@ -23,9 +24,10 @@ public class Player extends Entity {
 	private Weapon w;
 	private boolean hasFlag;
 	private double speedForHowLong; //this variable determines for how much time a speed upgrade has left
-	private KeyMap input;
+	private KeyboardListener keyInput;
+	private MouseListener mouseInput;
 
-	public Player(double x, double y, double width, double heigth, int id, int team, KeyMap map, int speed) {
+	public Player(double x, double y, double width, double heigth, int id, int team, KeyboardListener keyInput, MouseListener mouseInput, int speed) {
 		super(x, y, width, heigth);
 		this.id = id;
 		this.hp = 100;
@@ -34,7 +36,8 @@ public class Player extends Entity {
 		this.hasFlag = false;
 		this.w = this.getDefaultWeapon();
 		this.speed = speed;
-		input = map;
+		this.keyInput = keyInput;
+		this.mouseInput = mouseInput;
 		this.setRotation(Math.PI+2*Math.PI/3);
 	}
 
@@ -47,8 +50,27 @@ public class Player extends Entity {
 
 	@Override
 	public void update(long deltaT) {
-		this.setRotation(this.getRotation() + 0.03);
 		Map map = Engine.getLastCreatedEngine().getMap();
+		{
+			java.awt.Point mousePos = mouseInput.getMousePos();
+
+			double deltaX = mousePos.getX() - this.getX();
+			double deltaY = mousePos.getY() - this.getY();
+			double v = Math.atan(deltaY/deltaX);
+
+			if(deltaY > 0 && deltaX <= 0) {
+				v += Math.PI * 0.5;
+			}
+			else if(deltaY <= 0 && deltaX < 0) {
+				v += Math.PI;
+			}
+			else if(deltaY < 0 && deltaX > 0) {
+				v += Math.PI * 1.5;
+			}
+
+			this.setRotation(v);
+
+		}
 
 		double speedX = 0;
 		double speedY = 0;
@@ -56,17 +78,17 @@ public class Player extends Entity {
 		int vert = 0;
 		int hor = 0;
 
-		if(input.isKeyPressed(KeyEvent.VK_W) && !input.isKeyPressed(KeyEvent.VK_S)){
+		if(keyInput.isKeyPressed(KeyEvent.VK_W) && !keyInput.isKeyPressed(KeyEvent.VK_S)){
 			vert = -1;
 		}
-		else if(!input.isKeyPressed(KeyEvent.VK_W) && input.isKeyPressed(KeyEvent.VK_S)){
+		else if(!keyInput.isKeyPressed(KeyEvent.VK_W) && keyInput.isKeyPressed(KeyEvent.VK_S)){
 			vert = 1;
 		}
 
-		if(!input.isKeyPressed(KeyEvent.VK_D) && input.isKeyPressed(KeyEvent.VK_A)){
+		if(!keyInput.isKeyPressed(KeyEvent.VK_D) && keyInput.isKeyPressed(KeyEvent.VK_A)){
 			hor = -1;
 		}
-		else if(input.isKeyPressed(KeyEvent.VK_D) && !input.isKeyPressed(KeyEvent.VK_A)){
+		else if(keyInput.isKeyPressed(KeyEvent.VK_D) && !keyInput.isKeyPressed(KeyEvent.VK_A)){
 			hor = 1;
 		}
 
@@ -105,7 +127,7 @@ public class Player extends Entity {
 			speedY = (Math.sqrt(Math.pow(this.speed, 2)/2));
 		}
 
-		if(input.isKeyPressed(KeyEvent.VK_SPACE)) {
+		if(keyInput.isKeyPressed(KeyEvent.VK_SPACE)) {
 			this.fire();
 		}
 		double dx = speedX * deltaT/1000.0;

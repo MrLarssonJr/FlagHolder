@@ -4,13 +4,13 @@ import insertName.flagHolder.*;
 import insertName.flagHolder.input.*;
 
 public class InputPacket {
-	public KeyMap map;
+	public KeyboardListener map;
 	
 	public InputPacket() {
 		map = null;
 	}
 
-	public InputPacket(KeyMap map) {
+	public InputPacket(KeyboardListener map) {
 		this.map = map;
 	}
 }

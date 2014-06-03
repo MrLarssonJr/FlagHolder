@@ -29,10 +29,10 @@ public class GameServer {
 
 	private Server networkServer;
 	private Engine e;
-	private static HashMap<Integer, KeyMap> maps;
+	private static HashMap<Integer, KeyboardListener> maps;
 
 	public GameServer() throws IOException {
-		maps = new HashMap<Integer, KeyMap>();
+		maps = new HashMap<Integer, KeyboardListener>();
 		networkServer = new Server(16384, 4096);
 		registerPackets(networkServer.getKryo());
 		networkServer.addListener(new InputReciver(maps));
@@ -68,7 +68,7 @@ public class GameServer {
 		kryo.register(Integer.class);
 		kryo.register(Boolean.class);
 		kryo.register(Integer[].class);
-		kryo.register(KeyMap.class);
+		kryo.register(KeyboardListener.class);
 		kryo.register(Weapon.class);
 		kryo.register(Bullet.class);
 		kryo.register(Flag.class);
@@ -78,10 +78,10 @@ public class GameServer {
 		kryo.register(boolean[].class);
 	}
 
-	public static KeyMap getLatestKeyMap(Integer id) {
-		KeyMap map = maps.get(id);
+	public static KeyboardListener getLatestKeyMap(Integer id) {
+		KeyboardListener map = maps.get(id);
 		if(map == null) {
-			map = new KeyMap();
+			map = new KeyboardListener();
 			maps.put(id, map);
 		}
 		return map;

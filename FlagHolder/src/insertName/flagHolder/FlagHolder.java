@@ -2,16 +2,15 @@ package insertName.flagHolder;
 
 import insertName.flagHolder.entities.*;
 import insertName.flagHolder.graphics.*;
-import insertName.flagHolder.input.*;
 import insertName.flagHolder.network.*;
 
 import java.awt.*;
-import java.awt.event.*;
 import java.io.*;
 
 import simpleEngine.core.*;
 import simpleEngine.graphics.*;
 import simpleEngine.graphics.Window;
+import simpleEngine.input.*;
 import simpleEngine.standardObjects.tileMap.*;
 
 public class FlagHolder {
@@ -42,9 +41,10 @@ public class FlagHolder {
 	}
 
 	private static void startLocalVersion() throws IOException {
-		final KeyMap input = new KeyMap();
+		KeyboardListener keyInput = new KeyboardListener();
+		MouseListener mouseInput = new MouseListener();
 		Engine e = new Engine(new TileMap(new Dimension(3000, 1000), new Dimension(40, 40), null));
-		e.add(0 + "",  new Player(0, 0, 30, 30, 0, 1, input, 600));
+		e.add(0 + "",  new Player(0, 0, 30, 30, 0, 1, keyInput, mouseInput, 600));
 		e.add( new Flag(50,40));
 		e.add( new UpgradePack(100,0,1));
 
@@ -54,22 +54,8 @@ public class FlagHolder {
 
 		Camera c = new AreaCamera(textures, 0);
 		Window window = new simpleEngine.graphics.Window(c);
-		window.getCurrentCamera().addKeyListener(new KeyListener() {
-
-			@Override
-			public void keyTyped(KeyEvent arg0) {
-			}
-
-			@Override
-			public void keyReleased(KeyEvent arg0) {
-				input.setKeyStatus(arg0.getKeyCode(), false);
-			}
-
-			@Override
-			public void keyPressed(KeyEvent arg0) {
-				input.setKeyStatus(arg0.getKeyCode(), true);
-			}
-		});
+		window.getCurrentCamera().addKeyListener(keyInput);
+		window.getCurrentCamera().addMouseListener(mouseInput);
 		e.add(c);
 		e.startGame();
 	}
