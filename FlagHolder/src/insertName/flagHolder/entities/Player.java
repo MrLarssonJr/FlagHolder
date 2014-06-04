@@ -26,6 +26,15 @@ public class Player extends Entity {
 	private double speedForHowLong; //this variable determines for how much time a speed upgrade has left
 	private KeyboardListener keyInput;
 	private MouseListener mouseInput;
+	private GameObject pointer;
+
+	public GameObject getPointer() {
+		return pointer;
+	}
+
+	public void setPointer(GameObject pointer) {
+		this.pointer = pointer;
+	}
 
 	public Player(double x, double y, double width, double heigth, int id, int team, KeyboardListener keyInput, MouseListener mouseInput, int speed) {
 		super(x, y, width, heigth);
@@ -45,27 +54,21 @@ public class Player extends Entity {
 	public void draw(GameGraphics g, TextureStore textures) {
 		BufferedImage img = textures.getPreLoadedTexture("player.png");
 		g.drawGameObject(this, img);
-//		g.drawImage(img, (int) this.getX(), (int) this.getY(), (int) this.getWidth(), (int) this.getHeight(), null);
 	}
 
 	@Override
 	public void update(long deltaT) {
 		Map map = Engine.getLastCreatedEngine().getMap();
 		{
-			java.awt.Point mousePos = mouseInput.getMousePos();
+			double pointerX = pointer.getX();
+			double pointerY = pointer.getY();
 
-			double deltaX = mousePos.getX() - this.getX();
-			double deltaY = mousePos.getY() - this.getY();
+			double deltaX = pointerX - this.getX();
+			double deltaY = pointerY - this.getY();
 			double v = Math.atan(deltaY/deltaX);
 
-			if(deltaY > 0 && deltaX <= 0) {
-				v += Math.PI * 0.5;
-			}
-			else if(deltaY <= 0 && deltaX < 0) {
+			if(deltaX < 0) {
 				v += Math.PI;
-			}
-			else if(deltaY < 0 && deltaX > 0) {
-				v += Math.PI * 1.5;
 			}
 
 			this.setRotation(v);
@@ -127,7 +130,7 @@ public class Player extends Entity {
 			speedY = (Math.sqrt(Math.pow(this.speed, 2)/2));
 		}
 
-		if(keyInput.isKeyPressed(KeyEvent.VK_SPACE)) {
+		if(mouseInput.isButtonPressed(MouseEvent.BUTTON1)) {
 			this.fire();
 		}
 		double dx = speedX * deltaT/1000.0;
