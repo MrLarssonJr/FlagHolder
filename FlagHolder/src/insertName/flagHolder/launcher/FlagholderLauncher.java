@@ -14,9 +14,13 @@ public class FlagholderLauncher extends JFrame {
 	private JPanel joinPanel, lobbyPanel;
 
 	public FlagholderLauncher() {
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		}
+		catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {}
 		//Set up frame
 		this.setTitle("Flagholder Launcher");
-//		this.setResizable(false);
+		this.setResizable(false);
 
 		joinPanel = new JPanel();
 		lobbyPanel = new JPanel();
@@ -40,7 +44,7 @@ public class FlagholderLauncher extends JFrame {
 				gbc.anchor = GridBagConstraints.SOUTHWEST;
 				joinPanel.add(ipLabel, gbc);
 
-				JTextField ipField = new JTextField(10);
+				JTextField ipField = new JTextField(11);
 				JoinAction join = new JoinAction(this, lobbyPanel, ipField);
 				ipField.setToolTipText(tooltipText);
 				ipField.setAction(join);
