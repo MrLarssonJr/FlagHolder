@@ -1,6 +1,9 @@
 package insertName.flagHolder.launcher;
 
 import java.awt.*;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 import javax.swing.*;
 import javax.swing.border.*;
@@ -20,10 +23,9 @@ public class FlagholderLauncher extends JFrame {
 		catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {}
 		//Set up frame
 		this.setTitle("Flagholder Launcher");
-		this.setResizable(false);
+//		this.setResizable(false);
 
 		joinPanel = new JPanel();
-		lobbyPanel = new JPanel();
 
 		{	//Set up join panel
 			joinPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -68,6 +70,7 @@ public class FlagholderLauncher extends JFrame {
 			gbc.gridx = 0;
 			gbc.gridwidth = 2;
 			gbc.gridy = 2;
+			gbc.insets = new Insets(3, 0, 3, 0);
 			gbc.fill = GridBagConstraints.HORIZONTAL;
 			joinPanel.add(sep, gbc);
 
@@ -86,7 +89,7 @@ public class FlagholderLauncher extends JFrame {
 
 		}
 
-		this.add(joinPanel);
+		this.setContentPane(joinPanel);
 
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.pack();

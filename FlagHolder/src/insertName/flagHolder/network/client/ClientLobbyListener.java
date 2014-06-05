@@ -19,7 +19,7 @@ public class ClientLobbyListener implements NetworkListener {
 			ConnectedClientsMessage ccm = (ConnectedClientsMessage) obj;
 
 			clientList.setText("");
-			for(long id : ccm.clientIDs) {
+			for(String id : ccm.clients) {
 				clientList.append(id + "\n");
 			}
 		}

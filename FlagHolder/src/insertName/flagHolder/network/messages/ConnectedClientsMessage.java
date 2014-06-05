@@ -4,11 +4,15 @@ import java.io.*;
 import java.util.*;
 
 public class ConnectedClientsMessage implements Serializable {
-	public final ArrayList<Long> clientIDs;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3722300212084514935L;
+	public final ArrayList<String> clients;
 
-	public ConnectedClientsMessage(ArrayList<Long> clientIDs) {
+	public ConnectedClientsMessage(ArrayList<String> clients) {
 		super();
-		this.clientIDs = clientIDs;
+		this.clients = clients;
 	}
 
 }
