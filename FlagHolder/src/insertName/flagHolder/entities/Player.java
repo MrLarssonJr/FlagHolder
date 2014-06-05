@@ -24,13 +24,14 @@ public class Player extends Entity {
 	private static final long serialVersionUID = -5761530654521685452L;
 	//Variables
 	private double speed, hp;
-	private int id, team;
+	private int team;
 	private Weapon w;
 	private boolean hasFlag;
 	private double speedForHowLong; //this variable determines for how much time a speed upgrade has left
 	private KeyboardListener keyInput;
 	private MouseListener mouseInput;
 	private GameObject pointer;
+	private long clientID;
 
 	public GameObject getPointer() {
 		return pointer;
@@ -40,9 +41,8 @@ public class Player extends Entity {
 		this.pointer = pointer;
 	}
 
-	public Player(double x, double y, double width, double heigth, int id, int team, KeyboardListener keyInput, MouseListener mouseInput, int speed) {
+	public Player(double x, double y, double width, double heigth, int team, KeyboardListener keyInput, MouseListener mouseInput, int speed, long clientID) {
 		super(x, y, width, heigth);
-		this.id = id;
 		this.hp = 100;
 		this.hp = 100;
 		this.team = team;
@@ -52,6 +52,7 @@ public class Player extends Entity {
 		this.keyInput = keyInput;
 		this.mouseInput = mouseInput;
 		this.setRotation(Math.PI+2*Math.PI/3);
+		this.clientID = clientID;
 	}
 
 	@Override

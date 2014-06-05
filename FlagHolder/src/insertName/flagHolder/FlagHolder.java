@@ -1,20 +1,28 @@
 package insertName.flagHolder;
 
-import insertName.flagHolder.entities.*;
-import insertName.flagHolder.graphics.*;
-import insertName.flagHolder.network.*;
-import insertName.flagHolder.network.client.*;
+import insertName.flagHolder.entities.Flag;
+import insertName.flagHolder.entities.Player;
+import insertName.flagHolder.entities.Pointer;
+import insertName.flagHolder.entities.UpgradePack;
+import insertName.flagHolder.graphics.AreaCamera;
+import insertName.flagHolder.network.client.GameClient;
 import insertName.flagHolder.network.server.GameServer;
 
-import java.awt.*;
-import java.io.*;
+import java.awt.AWTException;
+import java.awt.Dimension;
+import java.awt.HeadlessException;
+import java.io.IOException;
 
-import simpleEngine.core.*;
-import simpleEngine.graphics.*;
+import simpleEngine.core.Engine;
+import simpleEngine.graphics.Camera;
+import simpleEngine.graphics.TextureStore;
 import simpleEngine.graphics.Window;
-import simpleEngine.input.*;
-import simpleEngine.log.*;
-import simpleEngine.standardObjects.tileMap.*;
+import simpleEngine.input.KeyboardListener;
+import simpleEngine.input.MouseCapturer;
+import simpleEngine.input.MouseListener;
+import simpleEngine.log.LogPriority;
+import simpleEngine.log.Logger;
+import simpleEngine.standardObjects.tileMap.TileMap;
 
 public class FlagHolder {
 	private GameClient gc, gc2;
@@ -48,12 +56,11 @@ public class FlagHolder {
 	}
 
 	private static void startLocalVersion() throws IOException, AWTException {
-		System.out.println("start");
 		KeyboardListener keyInput = new KeyboardListener();
 		MouseListener mouseInput = new MouseListener();
 		MouseCapturer mouseCap = new MouseCapturer();
 		Engine e = new Engine(new TileMap(new Dimension(3000, 1000), new Dimension(40, 40), null));
-		Player p = new Player(0, 0, 30, 30, 0, 1, keyInput, mouseInput, 1200);
+		Player p = new Player(0, 0, 30, 30, 1, keyInput, mouseInput, 1200, 0L);
 		e.add(0 + "",  p);
 		e.add( new Flag(50,40));
 		e.add( new UpgradePack(100,0,1));

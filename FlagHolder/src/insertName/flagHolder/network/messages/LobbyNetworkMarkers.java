@@ -4,5 +4,6 @@ import java.io.Serializable;
 
 public enum LobbyNetworkMarkers implements Serializable {
 	GET_CONNECTED_PLAYERS,
-	DISCONNECT;
+	DISCONNECT,
+	START;
 }

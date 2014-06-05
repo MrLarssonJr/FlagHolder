@@ -20,7 +20,7 @@ public class FlagholderLauncher extends JFrame {
 		catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {}
 		//Set up frame
 		this.setTitle("Flagholder Launcher");
-		this.setResizable(false);
+//		this.setResizable(false);
 
 		this.setContentPane(new JoinScreen(this));
 

@@ -11,6 +11,7 @@ import javax.swing.JTextArea;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import simpleEngine.log.Logger;
 import simpleEngine.log.NewLogEntryEvent;
 import simpleEngine.log.NewLogEntryEventListener;
 import simpleEngine.network.Server;
@@ -24,6 +25,10 @@ public class ServerGUI extends JFrame implements NewLogEntryEventListener {
 	private JTextArea log;
 	
 	public ServerGUI() throws IOException {
+		Logger logger = new Logger();
+		Logger.setStaticLogger(logger);
+		logger.addNewLogEntryListener(this);
+		
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		}
@@ -57,11 +62,12 @@ public class ServerGUI extends JFrame implements NewLogEntryEventListener {
 		this.setVisible(true);
 		
 		server = new Server(45678);
+		server.addNetworkListener(new ServerLobbyListener(server));
 	}
 
 	@Override
 	public void newLogEntryEvent(NewLogEntryEvent e) {
-		log.append(e.toString() + "\n");
+		log.append(e.getEntry().toString() + "\n");
 	}
 	
 	public static void main(String[] args) throws IOException {

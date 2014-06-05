@@ -13,6 +13,8 @@ public class DisconnectFromLobbyAction extends AbstractAction implements Runnabl
 	
 	public DisconnectFromLobbyAction(Lobby lobby, JFrame frame) {
 		super("Disconnect");
+		this.lobby = lobby;
+		this.frame = frame;
 	}
 	
 	@Override
