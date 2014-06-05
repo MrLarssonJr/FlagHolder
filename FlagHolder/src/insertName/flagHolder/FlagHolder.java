@@ -60,7 +60,11 @@ public class FlagHolder {
 		MouseListener mouseInput = new MouseListener();
 		MouseCapturer mouseCap = new MouseCapturer();
 		Engine e = new Engine(new TileMap(new Dimension(3000, 1000), new Dimension(40, 40), null));
+<<<<<<< HEAD
 		Player p = new Player(0, 0, 30, 30, 1, keyInput, mouseInput, 1200, 0L);
+=======
+		Player p = new Player(0, 0, 30, 30, 0, 1, keyInput, mouseInput, 600);
+>>>>>>> cf83a8bbfd63a8bc7a89cf13b14a124d5065533d
 		e.add(0 + "",  p);
 		e.add( new Flag(50,40));
 		e.add( new UpgradePack(100,0,1));
