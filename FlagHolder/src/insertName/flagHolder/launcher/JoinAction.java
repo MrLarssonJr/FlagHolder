@@ -16,7 +16,7 @@ public class JoinAction extends AbstractAction implements Runnable {
 	private JFrame frame;
 	private JTextField ip;
 
-	public JoinAction(JFrame frame, JPanel lobby, JTextField ipField) {
+	public JoinAction(JFrame frame, JTextField ipField) {
 		super("Join Server");
 		this.frame = frame;
 		this.ip = ipField;

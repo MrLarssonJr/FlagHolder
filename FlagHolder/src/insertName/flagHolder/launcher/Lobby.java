@@ -1,6 +1,7 @@
 package insertName.flagHolder.launcher;
 
 import insertName.flagHolder.network.client.*;
+import insertName.flagHolder.network.messages.LobbyNetworkMarkers;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -60,6 +61,10 @@ public class Lobby extends JPanel {
 		
 //		client = new Client(address, port);
 //		client.add(new ClientLobbyListener(clientList));
+	}
+
+	public void disconnect() {
+		client.disconnect();
 	}
 
 }

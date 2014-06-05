@@ -23,6 +23,18 @@ public class ClientLobbyListener implements NetworkListener {
 				clientList.append(id + "\n");
 			}
 		}
+		else if(obj instanceof LobbyNetworkMarkers) {
+			switch ((LobbyNetworkMarkers) obj) {
+			case GET_CONNECTED_PLAYERS:
+				
+				break;
+			case DISCONNECT:
+				
+				break;
+			default:
+				break;
+			}
+		}
 	}
 
 }
