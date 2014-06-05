@@ -191,11 +191,15 @@ public class Player extends Entity {
 		if(this.hp < 0){
 			respawn();
 		}
+		
+		//Move player x and y coords
+		this.w.setPlayerX(this.getX());
+		this.w.setPlayerY(this.getY());
 
 	}
 
 	public Weapon getDefaultWeapon(){
-		return new Weapon(10, 4, "Default Rifle", 10, Integer.MAX_VALUE, 10, 2);
+		return new Weapon(10, 4, "Default Rifle", Integer.MAX_VALUE, 20, 2);
 	}
 
 	public void respawn(){
