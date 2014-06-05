@@ -3,6 +3,7 @@ package insertName.flagHolder;
 import insertName.flagHolder.entities.*;
 import insertName.flagHolder.graphics.*;
 import insertName.flagHolder.network.*;
+import insertName.flagHolder.network.client.*;
 
 import java.awt.*;
 import java.io.*;

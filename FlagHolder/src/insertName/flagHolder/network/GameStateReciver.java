@@ -1,5 +1,6 @@
 package insertName.flagHolder.network;
 
+import insertName.flagHolder.network.client.*;
 import simpleEngine.core.*;
 
 import com.esotericsoftware.kryonet.*;

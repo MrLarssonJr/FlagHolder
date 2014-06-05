@@ -1,8 +1,7 @@
-package insertName.flagHolder.network;
+package insertName.flagHolder.network.client;
 
-import insertName.flagHolder.*;
 import insertName.flagHolder.graphics.*;
-import insertName.flagHolder.input.*;
+import insertName.flagHolder.network.*;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -13,9 +12,8 @@ import javax.swing.*;
 
 import simpleEngine.core.*;
 import simpleEngine.graphics.*;
-
-import com.esotericsoftware.kryonet.*;
-import com.esotericsoftware.minlog.*;
+import simpleEngine.input.*;
+import simpleEngine.network.*;
 
 public class GameClient implements Runnable {
 	private Client networkClient;
