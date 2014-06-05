@@ -1,10 +1,11 @@
 package insertName.flagHolder.network.client;
 
-import insertName.flagHolder.network.messages.*;
+import insertName.flagHolder.network.messages.ConnectedClientsMessage;
+import insertName.flagHolder.network.messages.LobbyNetworkMarkers;
 
-import javax.swing.*;
+import javax.swing.JTextArea;
 
-import simpleEngine.network.*;
+import simpleEngine.network.NetworkListener;
 
 public class ClientLobbyListener implements NetworkListener {
 	private JTextArea clientList;

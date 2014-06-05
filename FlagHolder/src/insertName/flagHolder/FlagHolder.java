@@ -4,6 +4,7 @@ import insertName.flagHolder.entities.*;
 import insertName.flagHolder.graphics.*;
 import insertName.flagHolder.network.*;
 import insertName.flagHolder.network.client.*;
+import insertName.flagHolder.network.server.GameServer;
 
 import java.awt.*;
 import java.io.*;

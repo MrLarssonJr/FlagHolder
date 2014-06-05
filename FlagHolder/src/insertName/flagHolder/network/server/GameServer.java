@@ -1,8 +1,10 @@
-package insertName.flagHolder.network;
+package insertName.flagHolder.network.server;
 
 import insertName.flagHolder.*;
 import insertName.flagHolder.entities.*;
 import insertName.flagHolder.input.*;
+import insertName.flagHolder.network.InputPacket;
+import insertName.flagHolder.network.InputReciver;
 
 import java.awt.*;
 import java.awt.geom.*;

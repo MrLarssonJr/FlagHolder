@@ -1,12 +1,9 @@
 package insertName.flagHolder.launcher;
 
-import java.awt.*;
-import java.io.IOException;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-
-import javax.swing.*;
-import javax.swing.border.*;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 public class FlagholderLauncher extends JFrame {
 	/**
@@ -23,7 +20,7 @@ public class FlagholderLauncher extends JFrame {
 		catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {}
 		//Set up frame
 		this.setTitle("Flagholder Launcher");
-//		this.setResizable(false);
+		this.setResizable(false);
 
 		this.setContentPane(new JoinScreen(this));
 

@@ -62,7 +62,8 @@ public class JoinScreen extends JPanel {
 
 
 		{	//Set up start server section
-			JButton startBtn = new JButton("Start New Server");
+			StartServerAction serverStart = new StartServerAction(frame);
+			JButton startBtn = new JButton(serverStart);
 			startBtn.setToolTipText("Click to start a new server.");
 			gbc = new GridBagConstraints();
 			gbc.gridx = 0;

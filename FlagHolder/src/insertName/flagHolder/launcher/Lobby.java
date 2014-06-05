@@ -1,27 +1,34 @@
 package insertName.flagHolder.launcher;
 
-import insertName.flagHolder.network.client.*;
+import insertName.flagHolder.network.client.ClientLobbyListener;
 import insertName.flagHolder.network.messages.LobbyNetworkMarkers;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.io.*;
-import java.net.*;
+import java.io.IOException;
+import java.net.InetAddress;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
-import simpleEngine.network.*;
+import simpleEngine.network.Client;
 
 public class Lobby extends JPanel {
 	private Client client;
 
-	public Lobby(InetAddress address, int port) throws IOException {
+	public Lobby(InetAddress address, int port, JFrame frame) throws IOException {
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
 		GridBagLayout layout = new GridBagLayout();
 		this.setLayout(layout);
 		GridBagConstraints gbc;
+		
+		DisconnectFromLobbyAction dcAction = new DisconnectFromLobbyAction(this, frame);
 		
 		JLabel listLabel = new JLabel("Connected players:");
 		gbc = new GridBagConstraints();
@@ -51,7 +58,7 @@ public class Lobby extends JPanel {
 		gbc.gridy = 2;
 		this.add(notice, gbc);
 		
-		JButton dc = new JButton("Exit");
+		JButton dc = new JButton(dcAction);
 		dc.setToolTipText("Click to disconnect from this lobby and return to the join screen.");
 		gbc = new GridBagConstraints();
 		gbc.gridx = 1;
@@ -59,8 +66,9 @@ public class Lobby extends JPanel {
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		this.add(dc, gbc);
 		
-//		client = new Client(address, port);
-//		client.add(new ClientLobbyListener(clientList));
+		client = new Client(address, port);
+		client.add(new ClientLobbyListener(clientList));
+		client.writeObject(LobbyNetworkMarkers.GET_CONNECTED_PLAYERS);
 	}
 
 	public void disconnect() {

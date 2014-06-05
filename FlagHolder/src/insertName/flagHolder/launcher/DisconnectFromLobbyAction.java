@@ -11,6 +11,10 @@ public class DisconnectFromLobbyAction extends AbstractAction implements Runnabl
 	private Lobby lobby;
 	private JFrame frame;
 	
+	public DisconnectFromLobbyAction(Lobby lobby, JFrame frame) {
+		super("Disconnect");
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		lobby.disconnect();
@@ -19,7 +23,9 @@ public class DisconnectFromLobbyAction extends AbstractAction implements Runnabl
 
 	@Override
 	public void run() {
-		
+		frame.setContentPane(new JoinScreen(frame));
+		frame.pack();
+		frame.validate();
 	}
 
 }

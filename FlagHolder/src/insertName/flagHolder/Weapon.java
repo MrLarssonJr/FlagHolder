@@ -1,7 +1,7 @@
 package insertName.flagHolder;
 
-import insertName.flagHolder.entities.*;
-import simpleEngine.core.*;
+import insertName.flagHolder.entities.Bullet;
+import simpleEngine.core.Engine;
 
 public class Weapon {
 
@@ -69,7 +69,7 @@ public class Weapon {
 
 		if(timeUntilAllowedToShot >= 0 && clipAmmo > 0) {
 			clipAmmo--;
-			Bullet b = new Bullet(x, y, team, 20, 20, this.bulletVelocity, this.damage, playerRotation);
+			Bullet b = new Bullet(x - 10, y - 10, team, 20, 20, this.bulletVelocity, this.damage, playerRotation);
 			Engine.getLastCreatedEngine().add(b);
 			if(clipAmmo <= 0) {
 				timeNextShotAllowed = System.currentTimeMillis() + 1500;

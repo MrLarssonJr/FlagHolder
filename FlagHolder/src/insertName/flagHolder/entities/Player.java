@@ -1,17 +1,21 @@
 package insertName.flagHolder.entities;
 
-import insertName.flagHolder.*;
+import insertName.flagHolder.Weapon;
 
-import java.awt.event.*;
-import java.awt.image.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 
-import simpleEngine.collison.*;
-import simpleEngine.core.*;
-import simpleEngine.graphics.*;
-import simpleEngine.input.*;
+import simpleEngine.collison.Collideable;
+import simpleEngine.core.Engine;
+import simpleEngine.core.GameObject;
+import simpleEngine.core.Map;
+import simpleEngine.graphics.GameGraphics;
+import simpleEngine.graphics.TextureStore;
+import simpleEngine.input.KeyboardListener;
 import simpleEngine.input.MouseListener;
-import simpleEngine.standardObjects.*;
-import simpleEngine.standardObjects.tileMap.*;
+import simpleEngine.standardObjects.Entity;
+import simpleEngine.standardObjects.tileMap.TileMap;
 
 public class Player extends Entity {
 	/**
@@ -60,12 +64,16 @@ public class Player extends Entity {
 	public void update(long deltaT) {
 		Map map = Engine.getLastCreatedEngine().getMap();
 		{
-			double pointerX = pointer.getX();
-			double pointerY = pointer.getY();
+			double pointerX = pointer.getX() + pointer.getWidth()/2;
+			double pointerY = pointer.getY() + pointer.getHeight()/2;
 
-			double deltaX = pointerX - this.getX();
-			double deltaY = pointerY - this.getY();
+			double deltaX = pointerX - (this.getX() + this.getWidth() / 2);
+			double deltaY = pointerY - (this.getY() + this.getHeight() / 2);
 			double v = Math.atan(deltaY/deltaX);
+			
+			if(Double.isNaN(v)) {
+				v = 0;
+			}
 
 			if(deltaX < 0) {
 				v += Math.PI;
@@ -187,7 +195,7 @@ public class Player extends Entity {
 	}
 
 	public Weapon getDefaultWeapon(){
-		return new Weapon(10, 2, "Default Rifle", 10, Integer.MAX_VALUE, 10, 2);
+		return new Weapon(10, 4, "Default Rifle", 10, Integer.MAX_VALUE, 10, 2);
 	}
 
 	public void respawn(){
@@ -201,7 +209,7 @@ public class Player extends Entity {
 	}
 
 	public void fire(){
-		this.w.fire(this.getX(), this.getY(), this.team, this.getRotation());
+		this.w.fire(this.getX() + this.getWidth() / 2, this.getY() + this.getHeight() / 2, this.team, this.getRotation());
 		if(this.w.getClipAmmo() == 0 && this.w.getResAmmo() == 0){
 			this.w = getDefaultWeapon();
 		}

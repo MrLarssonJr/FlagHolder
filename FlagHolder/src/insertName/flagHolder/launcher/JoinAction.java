@@ -1,10 +1,14 @@
 package insertName.flagHolder.launcher;
 
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
 import java.io.IOException;
-import java.net.*;
+import java.net.InetAddress;
 
-import javax.swing.*;
+import javax.swing.AbstractAction;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 public class JoinAction extends AbstractAction implements Runnable {
 
@@ -32,7 +36,7 @@ public class JoinAction extends AbstractAction implements Runnable {
 		try {
 			InetAddress address = InetAddress.getByName(ip.getText());
 			int port = 45678;
-			frame.setContentPane(new Lobby(address, port));
+			frame.setContentPane(new Lobby(address, port, frame));
 			frame.pack();
 			frame.validate();
 		}
