@@ -1,28 +1,20 @@
 package insertName.flagHolder;
 
-import insertName.flagHolder.entities.Flag;
-import insertName.flagHolder.entities.Player;
-import insertName.flagHolder.entities.Pointer;
-import insertName.flagHolder.entities.UpgradePack;
-import insertName.flagHolder.graphics.AreaCamera;
-import insertName.flagHolder.network.client.GameClient;
-import insertName.flagHolder.network.server.GameServer;
+import insertName.flagHolder.entities.*;
+import insertName.flagHolder.graphics.*;
+import insertName.flagHolder.network.client.*;
+import insertName.flagHolder.network.server.*;
+import insertName.flagHolder.tiles.*;
 
-import java.awt.AWTException;
-import java.awt.Dimension;
-import java.awt.HeadlessException;
-import java.io.IOException;
+import java.awt.*;
+import java.io.*;
 
-import simpleEngine.core.Engine;
-import simpleEngine.graphics.Camera;
-import simpleEngine.graphics.TextureStore;
+import simpleEngine.core.*;
+import simpleEngine.graphics.*;
 import simpleEngine.graphics.Window;
-import simpleEngine.input.KeyboardListener;
-import simpleEngine.input.MouseCapturer;
-import simpleEngine.input.MouseListener;
-import simpleEngine.log.LogPriority;
-import simpleEngine.log.Logger;
-import simpleEngine.standardObjects.tileMap.TileMap;
+import simpleEngine.input.*;
+import simpleEngine.log.*;
+import simpleEngine.standardObjects.tileMap.*;
 
 public class FlagHolder {
 	private GameClient gc, gc2;
@@ -59,7 +51,28 @@ public class FlagHolder {
 		KeyboardListener keyInput = new KeyboardListener();
 		MouseListener mouseInput = new MouseListener();
 		MouseCapturer mouseCap = new MouseCapturer();
-		Engine e = new Engine(new TileMap(new Dimension(3000, 1000), new Dimension(40, 40), null));
+
+		TileMap map = new TileMap(new Dimension(3000, 1000), new Dimension(40, 40), null);
+		TileType[][] tiles = new TileType[75][25];
+		for(int x = 0; x < tiles.length; x++) {
+			for(int y = 0; y < tiles[x].length; y++) {
+				tiles[x][y] = new TileType.DefaultTile();
+			}
+		}
+		for(int x = 4; x < (tiles.length - 5); x++) {
+			tiles[x][tiles[x].length/2] = new WallTile();
+		}
+
+		for(int x = 4; x < (tiles.length - 5); x++) {
+			tiles[x][3] = new WallTile();
+		}
+		for(int y = 3; y < tiles[4].length/2; y++) {
+			tiles[4][y] = new WallTile();
+		}
+
+		map.setMap(tiles);
+
+		Engine e = new Engine(map);
 		Player p = new Player(0, 0, 30, 30, 1, keyInput, mouseInput, 600, 0L);
 		e.add(0 + "",  p);
 		e.add( new Flag(50,40));
@@ -69,7 +82,7 @@ public class FlagHolder {
 		e.add(pointer);
 
 		TextureStore textures = new TextureStore();
-		String[] res = {"player.png", "bullet.png", "flag.png", "upgrade.png"};
+		String[] res = {"player.png", "bullet.png", "flag.png", "upgrade.png", "block.png"};
 		textures.preLoadTextures(res);
 
 		Camera c = new AreaCamera(textures, 0);
